@@ -907,19 +907,19 @@ p.numberUtil:first-child{
   padding-bottom: 40px;
 }
 .buniyad-bg {
-  background: url(../assets/img/buniyad-bg.png) bottom left no-repeat;
+  background: url(/assets/img/buniyad-bg.png) bottom left no-repeat;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center;
 }
 .jariya-bg {
-  background: url(../assets/img/jariya-bg.png) bottom left no-repeat;
+  background: url(/assets/img/jariya-bg.png) bottom left no-repeat;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center;
 }
 .core-strengths {
-  background: url(../assets/img/core-strengths-bg.png) bottom left no-repeat;
+  background: url(/assets/img/core-strengths-bg.png) bottom left no-repeat;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center;
@@ -943,7 +943,7 @@ p.numberUtil:first-child{
   left: -19px;
 }
 .india-network {
-  background: url(../assets/img/india-network-bg.png) bottom left no-repeat;
+  background: url(/assets/img/india-network-bg.png) bottom left no-repeat;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center;
