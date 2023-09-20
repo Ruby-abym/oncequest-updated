@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import BreadCrumb from '@/Component/Common/BreadCrumb'
 import Api from "@/redux/common/api";
 import { SITE_URL, Url } from "@/redux/common/url";
-import { GetStaticProps, NextPage } from "next";
+import { NextPage } from "next";
 import { NextSeo } from "next-seo";
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
