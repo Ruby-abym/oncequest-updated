@@ -4,6 +4,7 @@ import { SITE_URL, Url } from "@/redux/common/url";
 import {  NextPage } from "next";
 import { NextSeo } from "next-seo";
 import { ROUTE } from '@/Const/Route';
+import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from 'next-i18next';
