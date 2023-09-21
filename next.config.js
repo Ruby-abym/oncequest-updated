@@ -6,11 +6,7 @@ module.exports = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  i18n: {
-    defaultLocale: "en",
-    locales: ["en", "hi" ,"kn","ta","bn"],
-    fallback: false,
-  },
+  i18n,
   trailingSlash: true,
   experimental: {
     largePageDataBytes: 128 * 100000,
