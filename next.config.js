@@ -9,6 +9,7 @@ module.exports = {
   i18n: {
     defaultLocale: "en",
     locales: ["en", "hi" ,"kn","ta","bn"],
+    fallback: false,
   },
   trailingSlash: true,
   experimental: {

@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from 'next-i18next';
 import BreadCrumb from '@/Component/Common/BreadCrumb';
+import nextI18NextConfig from "../../../next-i18next.config"
 interface MyPageProps {
     seoData: any;
   }
@@ -73,14 +74,13 @@ const Disclaimer: NextPage<MyPageProps> = ({seoData})=> {
         </React.Fragment>
     )
 }
-export const  getServerSideProps = async ({ locale }:{locale: string}) => {
-  let Slug = ROUTE.DISCLAIMER?.replace("/", "");
-  const data: any = await Api.post(Url.seoDetail, { Slug: Slug });
-  return {
-    props: {
-      seoData: data?.Result?.Details || {},
-    ...(await serverSideTranslations(locale, ["common"])),
-    },
-  };
-};
+export const getStaticProps = async ({ locale }:{locale:string}) => ({
+  props: {
+    ...(await serverSideTranslations(
+      locale,
+      ['common', 'footer'],
+    
+    )),
+  },
+})
 export default Disclaimer

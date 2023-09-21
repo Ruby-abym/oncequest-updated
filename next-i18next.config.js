@@ -4,5 +4,5 @@ module.exports = {
     locales: ["en", "hi","ta","kn","bn"],
     returnNull: false,
   },
-  react: { useSuspense: false },//this line
+  
 };
