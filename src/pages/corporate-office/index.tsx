@@ -27,7 +27,7 @@ const CorporateOffice: NextPage<MyPageProps> = ({seoData})=>  {
     const details: any = useSelector((state: any) => state.dashboard.generalDetails);
 
     useEffect(() => {
-        window?.scrollTo(0, 0);
+      
         dispatch(dashboardAction.generalDetailAction({}));
         return () => { };
     }, []);

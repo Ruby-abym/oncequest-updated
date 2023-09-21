@@ -41,7 +41,7 @@ const { locale } = useRouter();
 
 
   useEffect(() => {
-    window?.scroll(0, 0);
+   
     dispatch(dashboardAction.getDashboardAction({}));
     return () => { }
   }, [])
