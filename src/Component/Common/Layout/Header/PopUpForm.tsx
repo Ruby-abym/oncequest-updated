@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { onlyNumber } from "@/Utils/index";

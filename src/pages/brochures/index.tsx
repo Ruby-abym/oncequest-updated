@@ -39,7 +39,7 @@ const Brochure: NextPage<MyPageProps> = ({ seoData }) =>  {
     state.department.brochures ? state.department.brochures?.List : {}
   );
   useEffect(() => {
-    window?.scrollTo(0, 0);
+   
     dispatch(departmentAction.brochuresListAction({}));
     return () => {};
   }, []);
