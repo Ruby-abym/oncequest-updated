@@ -8,7 +8,7 @@ import { packageAction, testAction } from "../../redux/action";
 import { ROUTE } from "@/Const/Route";
 import BreadCrumb from "@/Component/Common/BreadCrumb";
 import ImgPlaceHolder from "@/Utils/imgPlaceholder";
-
+import { useTranslation } from "next-i18next";
 import { FDiscount } from "@/Utils/index";
 import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
@@ -25,7 +25,7 @@ import {  NextPage } from "next";
 import { NextSeo } from "next-seo";
 import { useParams } from "next/navigation";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
+
 
 interface MyPageProps {
     seoData: any;
@@ -649,14 +649,9 @@ const PathlogyTest : NextPage<MyPageProps> = ({seoData})=>  {
     </React.Fragment>
   );
 };
-// export const getStaticProps= async ({ locale }:{locale: string}) => {
-//     let Slug = ROUTE.PATHLOGYTEST?.replace("/", "");
-//     const data: any = await Api.post(Url.seoDetail, { Slug: Slug });
-//     return {
-//       props: {
-//         seoData: data?.Result?.Details || {},
-//       ...(await serverSideTranslations(locale, ["common"])),
-//       },
-//     };
-//   };
+export const getServerSideProps = async ({ locale }:{locale:string}) => ({
+  props: {
+      ...(await serverSideTranslations(locale, ['common']))
+  }
+});
 export default PathlogyTest;

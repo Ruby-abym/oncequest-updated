@@ -1,3 +1,4 @@
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Document, {
   Html,
   Head,
@@ -21,4 +22,9 @@ class MyDocument extends Document {
     );
   }
 }
+export const getServerSideProps = async ({ locale }:{locale:string}) => ({
+  props: {
+      ...(await serverSideTranslations(locale, ['common']))
+  }
+});
 export default MyDocument;
