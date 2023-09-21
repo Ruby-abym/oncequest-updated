@@ -12,7 +12,7 @@ import { useTranslation } from "next-i18next";
 function OncquestOffer(props: any) {
   const  {t} = useTranslation();
   const { Offers } = props;
-  const router = useRouter();
+ 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedOffer, setSelectedOffer] = useState<any>("");
   const dashboard: any = useSelector(
@@ -121,7 +121,7 @@ function OncquestOffer(props: any) {
                               href="#"
                               onClick={(e: any) => e.preventDefault()}
                             >
-                              <img
+                              {/* <img
                                 src={
                                   item?.CouponBanner
                                     ? ReplaceImgUriByLang(item?.CouponBanner)
@@ -135,7 +135,7 @@ function OncquestOffer(props: any) {
                                   )
                                 }
                                 className="scale"
-                              />
+                              /> */}
                             </a>
                           </div>
                         )
@@ -176,7 +176,7 @@ function OncquestOffer(props: any) {
                               href="#"
                               onClick={(e: any) => e.preventDefault()}
                             >
-                              <img
+                              {/* <img
                                 src={
                                   item?.CouponBanner
                                     ? ReplaceImgUriByLang(item?.CouponBanner)
@@ -190,7 +190,7 @@ function OncquestOffer(props: any) {
                                   )
                                 }
                                 className="scale"
-                              />
+                              /> */}
                             </a>
                           </div>
                         )
@@ -212,7 +212,7 @@ function OncquestOffer(props: any) {
                               href="#"
                               onClick={(e: any) => e.preventDefault()}
                             >
-                              <img
+                              {/* <img
                                 src={
                                   item?.CouponBanner
                                     ? ReplaceImgUriByLang(item?.CouponBanner)
@@ -226,7 +226,7 @@ function OncquestOffer(props: any) {
                                   )
                                 }
                                 className="scale"
-                              />
+                              /> */}
                             </a>
                           </div>
                         )

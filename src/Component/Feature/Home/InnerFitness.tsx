@@ -56,7 +56,7 @@ function InnerFitness(props: any) {
               <div className="flex-container flex-container-mob">
                 {dashboard && Object.keys(dashboard)?.length > 0 ? (
                   <>
-                    {packages &&
+                    {/* {packages &&
                       packages?.length > 0 &&
                       packages?.map((item: any, index: any) => {
                         let img = item?.Banner
@@ -91,7 +91,7 @@ function InnerFitness(props: any) {
                             </div>
                           )
                         );
-                      })}
+                      })} */}
                   </>
                 ) : (
                   <SectionLoader />
