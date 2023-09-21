@@ -34,12 +34,12 @@ const Allergy: NextPage<MyPageProps> = ({seoData})=>{
     const [subCategory, setSubCategory] = useState(100);
     const testData = useSelector((state: any) => state.test.list.Tests ? state.test.list.Tests : {});
     useEffect(() => {
-        window?.scrollTo(0, 0);
+       
         return () => { };
     }, []);
 // test commits
     useEffect(() => {
-        window?.scroll(0, 0);
+       
         dispatch(dashboardAction.getDashboardAction({}));
         return () => { }
     }, [])
@@ -51,7 +51,7 @@ const Allergy: NextPage<MyPageProps> = ({seoData})=>{
     };
 
     useEffect(() => {
-        window?.scrollTo(0, 0);
+       
         dispatch(testAction.listTestAction({ Offset: offsetT, Limit: limit, SubcategoryId: subCategory }));
 
         return () => { }
