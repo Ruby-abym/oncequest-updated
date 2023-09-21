@@ -152,11 +152,11 @@ const PrivilegeMembershipCardDoctor : NextPage<MyPageProps> = ({ seoData }) => {
     )
 }
 export const getStaticProps = async ({ locale }:{locale: string}) => {
-    let Slug = ROUTE.PRIVILEGEMEMBERSHIPDOCTOR?.replace("/en", "");
-    const data: any = await Api.post(Url.seoDetail, { Slug: Slug});
+    // let Slug = ROUTE.PRIVILEGEMEMBERSHIPDOCTOR?.replace("/en", "");
+    // const data: any = await Api.post(Url.seoDetail, { Slug: Slug});
     return {
       props: {
-        seoData: data?.Result?.Details || {},
+        // seoData: data?.Result?.Details || {},
         ...(await serverSideTranslations(locale, ["common"])),
       },
     };
