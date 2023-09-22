@@ -85,7 +85,7 @@ const Thankyou: NextPage<MyPageProps> = ({ seoData }) =>  {
     )
 }
 export const getStaticProps = async ({ locale }:{locale: string}) => {
-    let Slug = ROUTE.THANKYOU?.replace("/en", "");
+    let Slug = ROUTE.THANKYOU?.replace("/", "");
     const data: any = await Api.post(Url.seoDetail, { Slug: Slug});
     return {
       props: {
