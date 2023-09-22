@@ -55,7 +55,7 @@ const CheckOut: NextPage<MyPageProps> = ({ seoData }) => {
   const {t} = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
-  console.log(router)
+  // console.log(router)
   const [initialRenderComplete, setInitialRenderComplete] = useState<boolean>(false);
   useEffect(() => {
     setInitialRenderComplete(true);
