@@ -5,7 +5,7 @@ import BreadCrumb from '@/Component/Common/BreadCrumb'
 import { useRouter } from 'next/router'
 import Api from "@/redux/common/api";
 import { SITE_URL, Url } from "@/redux/common/url";
-import { GetStaticProps, NextPage } from "next";
+import {  NextPage } from "next";
 import { NextSeo } from "next-seo";
 
 import { useTranslation } from 'next-i18next';
