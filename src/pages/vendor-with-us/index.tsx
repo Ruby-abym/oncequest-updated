@@ -1,6 +1,5 @@
 import { Formik } from 'formik';
-import moment from 'moment';
-import { format } from 'path';
+
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +9,7 @@ import { onlyNumber } from '@/Utils/index';
 import { validatePartner } from '@/Utils/Validation';
 import Api from "@/redux/common/api";
 import { SITE_URL, Url } from "@/redux/common/url";
-import { GetStaticProps, NextPage } from "next";
+import {  NextPage } from "next";
 import { NextSeo } from "next-seo";
 import { ROUTE } from '@/Const/Route';
 
@@ -38,7 +37,7 @@ const BecomeVendor : NextPage<MyPageProps> = ({seoData})=>{
     const handleSubmit = (value:any) => {
         let data:any=value; 
     };
-    if(initialRenderComplete) return<></>
+    if(!initialRenderComplete) return<></>
     return (
     <React.Fragment>
     <NextSeo
@@ -168,11 +167,10 @@ const BecomeVendor : NextPage<MyPageProps> = ({seoData})=>{
     )
 }
 export const getStaticProps= async ({locale}:{locale:string}) => {
-    // let Slug = ROUTE.BECOMEVENDOR?.replace("/", "");
-    // const data: any = await Api.post(Url.seoDetail, { Slug: Slug });
+  
     return {
       props: {
-        // seoData: data?.Result?.Details || {},
+      
       ...(await serverSideTranslations(locale, ["common"])),
       },
     };
