@@ -659,6 +659,7 @@ const PathlogyTest : NextPage<MyPageProps> = ({seoData})=>  {
 export const getStaticProps= async ({ locale }:{locale: string}) => {
     // let Slug = ROUTE.PATHLOGYTEST?.replace("/", "");
     // const data: any = await Api.post(Url.seoDetail, { Slug: Slug });
+    // console.log(data)
     return {
       props: {
         // seoData: data?.Result?.Details || {},

@@ -134,12 +134,13 @@ const LudhianaLab : NextPage<MyPageProps> = ({seoData})=> {
         </React.Fragment>
     )
 }
-export const getStaticProps= async ({locale}:{locale:string}) => {
-    // let Slug = ROUTE.LUDHIANALAB?.replace("/", "");
-    // const data: any = await Api.post(Url.seoDetail, { Slug: Slug });
+export const getServerSideProps= async ({locale}:{locale:string}) => {
+    let Slug = ROUTE.LUDHIANALAB?.replace("/", "");
+    const data: any = await Api.post(Url.seoDetail, { Slug: Slug });
+   
     return {
       props: {
-        // seoData: data?.Result?.Details || {},
+        seoData: data?.Result?.Details || {},
       ...(await serverSideTranslations(locale, ["common"])),
       },
     };

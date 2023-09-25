@@ -3,7 +3,7 @@ import DepartmentCard from "@/Component/Feature/Department/DepartmentCard";
 import { ROUTE } from "@/Const/Route";
 import Api from "@/redux/common/api";
 import { SITE_URL, Url } from "@/redux/common/url";
-import { GetStaticProps, NextPage } from "next";
+import {  NextPage } from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import SubmitForm from "@/Component/Common/SubmitForm/SubmitForm";
@@ -90,12 +90,13 @@ const Departments: NextPage<MyPageProps> = ({ seoData }) => {
     </React.Fragment>
   );
 };
-export const getStaticProps= async ({ locale }:{locale: string}) => {
-  // let Slug = ROUTE.DEPARTMENT?.replace("/", "");
-  // const data: any = await Api.post(Url.seoDetail, { Slug: Slug });
+export const getServerSideProps= async ({ locale }:{locale: string}) => {
+  let Slug = ROUTE.DEPARTMENT?.replace("/", "");
+  const data: any = await Api.post(Url.seoDetail, { Slug: Slug });
+
   return {
     props: {
-      // seoData: data?.Result?.Details || {},
+      seoData: data?.Result?.Details || {},
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };
