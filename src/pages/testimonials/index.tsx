@@ -24,7 +24,7 @@ const Testimonials: NextPage<MyPageProps> = ({ seoData }) =>  {
   
   const [testimonials, setTestimonials] = useState<any[]>([]);
   const testimonialData: any = useSelector((state: any) => state.dashboard.testimonial ? state.dashboard.testimonial : {});
-  
+  console.log(testimonialData)
 const router = useRouter();
   
   useEffect(() => {
@@ -32,7 +32,7 @@ const router = useRouter();
     dispatch(dashboardAction.getTestimonialAction( {segment:router?.query?.type ? router?.query?.type : ""}));
     return () => { }
   }, []);
-
+console.log(router.query.type)
   useEffect(() => {
     if (testimonialData && Array.isArray(testimonialData) && testimonialData?.length > 0) {
       window?.scrollTo(0, 0);
@@ -45,8 +45,8 @@ const router = useRouter();
       }
     }
     return () => { }
-  }, [router?.query?.type, testimonialData]);
-  console.log(testimonials)
+  }, []);
+ 
   return (
     <React.Fragment>
       <NextSeo

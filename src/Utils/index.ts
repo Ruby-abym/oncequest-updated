@@ -43,9 +43,8 @@ export async function GetUserLatLng() {
     });
   }
 }
-export function ReplaceImgUriByLang(url: any) {
-  const {locale} = useRouter()
-  // let lang = typeof localStorage !== 'undefined' && localStorage.getItem("i18nextLng") || "en";
+export function ReplaceImgUriByLang(url: any, locale:any = "en") {
+
   return url.replace("public/uploads", `public/${locale}/uploads`);
 }
 export const groupBy = (items: any[], key: any) =>

@@ -20,7 +20,7 @@ import { NextSeo } from "next-seo";
 import PatientBox from "@/Component/Feature/CheckOut/PatientBox";
 import AddressBox from "@/Component/Feature/CheckOut/AddressBox";
 
-import { useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { Formik } from "formik";
@@ -55,6 +55,13 @@ const CheckOut: NextPage<MyPageProps> = ({ seoData }) => {
   const {t} = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
+  useEffect(() => {
+    if (router && router.query) {
+     console.log(router.query);
+     
+    }
+   }, [router]);
+  
   // console.log(router)
   const [initialRenderComplete, setInitialRenderComplete] = useState<boolean>(false);
   useEffect(() => {
@@ -476,7 +483,7 @@ const CheckOut: NextPage<MyPageProps> = ({ seoData }) => {
           },
         ]}
       />
-      {/* <SeoAdd slug={ROUTE.CHECKOUT} /> */}
+      
       <BreadCrumb page={t("checkout")} data={{ slug: "", path: "" }} />
       <section className="bg-gray section pt-3">
         <div className="container" id="section2">

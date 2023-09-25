@@ -11,6 +11,7 @@ import { useTranslation } from "next-i18next";
 
 function OncquestOffer(props: any) {
   const  {t} = useTranslation();
+  const {locale} = useRouter();
   const { Offers } = props;
  
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -121,10 +122,10 @@ function OncquestOffer(props: any) {
                               href="#"
                               onClick={(e: any) => e.preventDefault()}
                             >
-                              {/* <img
+                              <img
                                 src={
                                   item?.CouponBanner
-                                    ? ReplaceImgUriByLang(item?.CouponBanner)
+                                    ? ReplaceImgUriByLang(item?.CouponBanner,locale)
                                     : "/assets/img/offer0" + (i + 1) + ".png"
                                 }
                                 onError={(e: any) =>
@@ -135,7 +136,7 @@ function OncquestOffer(props: any) {
                                   )
                                 }
                                 className="scale"
-                              /> */}
+                              />
                             </a>
                           </div>
                         )
@@ -176,10 +177,10 @@ function OncquestOffer(props: any) {
                               href="#"
                               onClick={(e: any) => e.preventDefault()}
                             >
-                              {/* <img
+                              <img
                                 src={
                                   item?.CouponBanner
-                                    ? ReplaceImgUriByLang(item?.CouponBanner)
+                                    ? ReplaceImgUriByLang(item?.CouponBanner,locale)
                                     : "/assets/img/offer0" + (i + 1) + ".png"
                                 }
                                 onError={(e: any) =>
@@ -190,7 +191,7 @@ function OncquestOffer(props: any) {
                                   )
                                 }
                                 className="scale"
-                              /> */}
+                              />
                             </a>
                           </div>
                         )
@@ -212,10 +213,10 @@ function OncquestOffer(props: any) {
                               href="#"
                               onClick={(e: any) => e.preventDefault()}
                             >
-                              {/* <img
+                              <img
                                 src={
                                   item?.CouponBanner
-                                    ? ReplaceImgUriByLang(item?.CouponBanner)
+                                    ? ReplaceImgUriByLang(item?.CouponBanner,locale)
                                     : "/assets/img/offer0" + (i + 1) + ".png"
                                 }
                                 onError={(e: any) =>
@@ -226,7 +227,7 @@ function OncquestOffer(props: any) {
                                   )
                                 }
                                 className="scale"
-                              /> */}
+                              />
                             </a>
                           </div>
                         )

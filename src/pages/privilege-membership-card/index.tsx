@@ -216,7 +216,7 @@ const PrivilegeMembershipCard :NextPage<MyPageProps> = ({seoData}) => {
 export const getServerSideProps= async ({ locale }:{locale: string}) => {
     let Slug = ROUTE.PRIVILEGEMEMBERSHIP?.replace("/", "");
     const data: any = await Api.post(Url.seoDetail, { Slug: Slug });
-    console.log(data)
+  
     return {
       props: {
         seoData: data?.Result?.Details || {},

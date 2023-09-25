@@ -12,6 +12,7 @@ function InnerFitness(props: any) {
   const {t} = useTranslation();
   const { packages, baseUri } = props;
   const router = useRouter();
+  const {locale} = useRouter();
   const [isShown, setIsShown] = useState<number>(1);
   const dashboard: any = useSelector(
     (state: any) => state.dashboard.dashboardData || null
@@ -56,11 +57,11 @@ function InnerFitness(props: any) {
               <div className="flex-container flex-container-mob">
                 {dashboard && Object.keys(dashboard)?.length > 0 ? (
                   <>
-                    {/* {packages &&
+                    {packages &&
                       packages?.length > 0 &&
                       packages?.map((item: any, index: any) => {
                         let img = item?.Banner
-                          ? ReplaceImgUriByLang(baseUri) + item?.Banner
+                          ? ReplaceImgUriByLang(baseUri,locale) + item?.Banner
                           : `/assets/img/f${index + 1}.png`;
                         return (
                           index < 3 && (
@@ -91,7 +92,7 @@ function InnerFitness(props: any) {
                             </div>
                           )
                         );
-                      })} */}
+                      })}
                   </>
                 ) : (
                   <SectionLoader />

@@ -96,7 +96,7 @@ function Testimonial(props: any) {
                                               : "/assets/img/testi_male.png"
                                           )
                                         }
-                                        alt=""
+                                        alt={`image${index}`}
                                       />
                                     </figure>
                                     <div className="member_name">
