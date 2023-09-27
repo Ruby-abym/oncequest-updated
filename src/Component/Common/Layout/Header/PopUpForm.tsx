@@ -51,7 +51,7 @@ const WelcomePopup = (props: any) => {
           </div>
           <div className="pop-up-img">
             <img
-              src="../assets/img/pop-up-img.png"
+              src="/assets/img/pop-up-img.png"
               className="scale round_img"
               alt=""
             />

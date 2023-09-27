@@ -31,7 +31,8 @@ interface MyPageProps {
     seoData: any;
   }
 const PathlogyTest : NextPage<MyPageProps> = ({seoData})=>  {
-  // const {slug}:any = useParams();
+
+  
   const  {t} = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter()
@@ -312,7 +313,7 @@ const PathlogyTest : NextPage<MyPageProps> = ({seoData})=>  {
       />
       <BreadCrumb
         page={t("pathlogy_tests_brud")}
-        data={{ slug: "hello", path: ROUTE.PATHLOGYTEST }}
+        data={{  path: ROUTE.PATHLOGYTEST }}
       />
       {/* <section className="pathlogy-content">
         <div className="container">

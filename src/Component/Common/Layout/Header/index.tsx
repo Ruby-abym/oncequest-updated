@@ -839,7 +839,7 @@ function Header(props: any) {
               ></div>
               <div className="bg-white mainnav">
                 <div className="mainnavsmall" onClick={() => addClass()}>
-                  <img src="../assets/img/nav-mobile.png" alt="" />
+                  <img src="/assets/img/nav-mobile.png" alt="" />
                 </div>
                 <nav className="primary-nav" id="openTab">
                   <div
@@ -2021,7 +2021,7 @@ function Header(props: any) {
           </div>
         </div>
       </div>
-      {/* <WelcomePopup/> */}
+      <WelcomePopup/>
     </>
   );
 }

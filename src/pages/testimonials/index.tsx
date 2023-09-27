@@ -32,12 +32,13 @@ const router = useRouter();
     dispatch(dashboardAction.getTestimonialAction( {segment:router?.query?.type ? router?.query?.type : ""}));
     return () => { }
   }, []);
-console.log(router.query.type)
+
   useEffect(() => {
     if (testimonialData && Array.isArray(testimonialData) && testimonialData?.length > 0) {
       window?.scrollTo(0, 0);
       if (router?.query?.type) {
-        let tData: any[] = testimonialData.filter((ele: any) => ele.Segment === router?.query?.type);
+        console.log("yess")
+        let tData: any[] = testimonialData.filter((ele: any) => ele.Segment == router?.query?.type);
        
         setTestimonials(tData);
       } else {
@@ -45,7 +46,7 @@ console.log(router.query.type)
       }
     }
     return () => { }
-  }, []);
+  }, [testimonialData]);
  
   return (
     <React.Fragment>
