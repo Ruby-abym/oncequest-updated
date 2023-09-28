@@ -1375,12 +1375,9 @@ function Header(props: any) {
                             <Link
                               href={{
                                 pathname: ROUTE.BOOKATEST,
-                                query: {
-                                  tabs: "tests",
-                                  categoryId: "",
-                                  subCategoryId: "",
-                                },
+                                 query:{tab:"tests"}
                               }}
+                              as={ROUTE.BOOKATEST}
                               onClick={(e: any) => removeClass()}
                               passHref
                             >
@@ -1447,6 +1444,7 @@ function Header(props: any) {
                                   subCategoryId: "",
                                 },
                               }}
+                              as={ROUTE.BOOKATEST}
                               onClick={(e: any) => removeClass()}
                               passHref
                             >

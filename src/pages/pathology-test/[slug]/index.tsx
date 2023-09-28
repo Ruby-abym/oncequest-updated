@@ -1,36 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {GetStaticPropsContext} from 'next';
-import { Fragment } from "react"
+import Link from "next/link";
+import { useRouter } from "next/router";
+
 import Slider from "react-slick";
-import { packageAction, testAction } from "../../redux/action";
+
+import { packageAction, testAction } from "@/redux/action";
+import { ROUTE } from "@/Const/Route";
+import BreadCrumb from "@/Component/Common/BreadCrumb";
+import ImgPlaceHolder from "@/Utils/imgPlaceholder";
+
+import { FDiscount } from "@/Utils/index";
 import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
-
-import { useRouter } from "next/router";
-import BreadCrumb from "@/Component/Common/BreadCrumb";
-import { FDiscount, ImgPlaceHolder } from "@/Utils";
-import SectionLoader from "@/Component/Common/Loader/SectionLoader";
-import { ROUTE } from "@/Const/Route";
-import Link from "next/link";
 import BookButton from "@/Component/Feature/BookATest/BookButton";
-import SendQueryModal from "@/Component/Feature/BookATest/SendQueryModal";
+
 import { useTranslation } from "next-i18next";
+import SectionLoader from "@/Component/Common/Loader/SectionLoader";
+import SendQueryModal from "@/Component/Feature/BookATest/SendQueryModal";
+import SeoFooterContent from "@/Component/Common/Seo/SeoFooterContent";
+import SeoHeaderContent from "@/Component/Common/Seo/SeoHeaderContent";
+
+
 import {NextPage } from 'next';
 import Api from '@/redux/common/api';
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-
 import { SITE_URL, Url } from '@/redux/common/url';
 import { NextSeo } from 'next-seo';
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
 interface MyPageProps {
   seoData:any;
 }
-const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
-  const  {t}  = useTranslation();
+const PathlogyTestCity: NextPage<MyPageProps> = ({ seoData }) => { 
+  
+  const { t } = useTranslation();
   const dispatch = useDispatch();
-  const router = useRouter();
-  const { query } = router;
-  const [tab, setTab] = useState<any>();
+
+  const [tab, setTab] = useState<any>("");
   const [subCategory, setSubCategory] = useState<any>("");
   const [department, setDepartment] = useState<any>("");
   const [DepName, setDepName] = useState<any>("");
@@ -47,6 +53,9 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
   const [searchTerm, setSearchTerm] = useState<any>("");
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [code, setCode] = useState<any>("");
+  const router = useRouter();
+  const {slug}:any = router.query;
+
   const testData = useSelector((state: any) =>
     state.test.list ? state.test.list : {}
   );
@@ -62,32 +71,59 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
   const CityId: string = useSelector((state: any) =>
     state.dashboard.selectedCity ? state.dashboard.selectedCity : ""
   );
-  const handleModalOpen = (e: any, code: any) => {
-    e.preventDefault();
+  const handleModalOpen = (code: any) => {
     setCode(code);
     setModalIsOpen(true);
   };
+  
+  function capitalizeFirstLetter(str: string) {
+    return str
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  }
+  let cityWithoutHyphens: string;
+  let formattedSlug:string;
+ 
+    cityWithoutHyphens = slug.replace(/-/g, " ");
+     formattedSlug = capitalizeFirstLetter(cityWithoutHyphens);
+  
+ 
+ 
+ 
+ useEffect(() => {
+  window?.scrollTo(0, 0);
+  if (slug) {
+    let _slug = (ROUTE.PATHLOGYTEST + '/' + slug).replace("/", "");
+    Api.post(Url.seoDetail, {Slug: _slug}).then((res:any) => {
+      if (!res?.Result?.Details?.PageName) {
+        // router.push(ROUTE.ERRORPAGE);
+      }
+    });
+  }
+}, [slug, router]);
+
+ 
   useEffect(() => {
-    if (query?.tabs) {
-      setTab(query?.tabs);
+    if (router?.query?.tabs) {
+      setTab(router?.query?.tabs);
     } else {
-      setTab("packages");
+      setTab("tests");
     }
-    if (query?.subCategoryId) {
-      setSubCategory(query?.subCategoryId);
+    if (router?.query?.subCategoryId) {
+      setSubCategory(router?.query?.subCategoryId);
     }
-    if (query?.categoryId) {
-      setCategory(query?.categoryId);
+    if (router?.query?.categoryId) {
+      setCategory(router?.query?.categoryId);
     }
-    if (query?.depId) {
-      setDepartment(query?.depId);
+    if (router?.query?.depId) {
+      setDepartment(router?.query?.depId);
     }
-    if (query?.depName) {
-      setDepName(query?.depName);
+    if (router?.query?.depName) {
+      setDepName(router?.query?.depName);
     }
     return () => {};
-  }, [query?.tabs, query?.subCategoryId]);
-
+  }, [router?.query?.tabs, router?.query?.subCategoryId]);
   const hendleTab = (e: any, value: string) => {
     e.preventDefault();
     setDepName("");
@@ -117,7 +153,16 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
         })
       );
     }
-    return () => {};
+    return () => {
+      let state: any = { ...router.query };
+      if (router.query && router.query.depId) {
+        delete state.depId;
+      }
+      if (router.query && router.query.depName) {
+        delete state.depName;
+      }
+      // router.replace({ ...router, "" });
+    };
   }, [offsetT, searchTerm, tab, subCategory, CityId]);
 
   useEffect(() => {
@@ -140,7 +185,9 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
 
   useEffect(() => {
     Tsort();
-    return () => {};
+    return () => {
+      /* history?.replace({ state: undefined }) */
+    };
   }, [testData?.Tests, priceTSort]);
 
   useEffect(() => {
@@ -172,7 +219,9 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
         );
       } else if (pricePSort === "asc") {
         newArr = [...arr]?.sort((a: any, b: any) =>
-          a?.PackageName?.localeCompare(b?.PackageName)
+          a?.PackageName?.localeCompare(b?.PackageName, "fr", {
+            ignorePunctuation: true,
+          })
         );
       }
       setPackages(newArr);
@@ -194,7 +243,9 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
         );
       } else if (priceTSort === "asc") {
         newArr = [...arr]?.sort((a: any, b: any) =>
-          a?.TestName?.localeCompare(b?.TestName)
+          a?.TestName?.localeCompare(b?.TestName, "fr", {
+            ignorePunctuation: true,
+          })
         );
       }
       setTests(newArr);
@@ -257,7 +308,7 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
         breakpoint: 577,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
           infinite: true,
           dots: false,
           arrows: true,
@@ -265,10 +316,10 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
       },
     ],
   };
-  
+  /* var price = 0; */
   return (
     <React.Fragment>
-      <NextSeo
+    <NextSeo
        title={seoData?.SeoTitle}
        description={seoData?.SeoDescription}
        canonical={`${SITE_URL}${router.asPath}`}
@@ -293,9 +344,17 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
        ]}
     />
       <BreadCrumb
-        page={t("bread_tests_and_packages")}
-        data={{ slug: DepName, path: "#" }}
+        page={t("pathlogy_tests_brud")}
+        data={{ slug: formattedSlug, path: ROUTE.PATHLOGYTEST }}
       />
+      <section className="pathlogy-content">
+        <div className="container">
+      <div className="bg-package imp-instruction col-md-12 p-4 mb-3">
+      <h1 className="mb-3 text-blue">Lab Test in {formattedSlug}</h1>
+            <SeoHeaderContent seoData={seoData}/>
+            </div>
+          </div>
+      </section>
       <section className="bg-white">
         <div className="container">
           <div className="row justify-content-between align-items-center">
@@ -305,7 +364,7 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
                   className="form-control rounded-pill py-2 pr-5 mr-1 bg-transparent"
                   type="search"
                   value={searchTermShow}
-                  placeholder={t("search_teast_packages") || ""}
+                  placeholder={t("search_teast_packages")}
                   id="example-search-input"
                   onChange={handleSearch}
                 />
@@ -324,13 +383,13 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
               style={{ maxWidth: "380px" }}
             >
               <ul className="nav nav-tabs m-0 p-0">
-                <li onClick={(e: any) => hendleTab(e, "packages")}>
-                  <a className={tab == "packages" ? "active" : ""}>
+              <li>
+                  <Link href={ROUTE.BOOKAPACKAGE} className={tab == "packages" ? "active" : ""}>
                     {t("packages")}
-                  </a>
+                  </Link>
                 </li>
-                <li onClick={(e: any) => hendleTab(e, "tests")}>
-                  <a className={tab == "tests" ? "active" : ""}>{t("test")} </a>
+                <li>
+                  <Link href={ROUTE.PATHLOGYTEST} className={tab == "tests" ? "active" : ""}>{t("test")} </Link>
                 </li>
               </ul>
             </div>
@@ -354,7 +413,7 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
                                     : "subCat"
                                 }
                               >
-                                <a
+                                <Link
                                   href="#"
                                   onClick={(e: any) => e.preventDefault()}
                                 >
@@ -380,7 +439,7 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
                                       {t(item?.CategoryName)}
                                     </div>
                                   </div>
-                                </a>
+                                </Link>
                               </li>
                             </ul>
                           ))}
@@ -395,232 +454,9 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
           )}
         </div>
       </section>
+      {/* {((tab === "packages" && Object.keys(packageData)?.length > 0) || (tab === "tests" && Object.keys(testData)?.length > 0)) ? */}
       <section className="sub-section bg-white packageService">
         <div className="tab-content">
-          <div
-            id="packages"
-            className={
-              tab == "packages"
-                ? "tab-pane fade in active show"
-                : "tab-pane fade in"
-            }
-          >
-            <div className="container">
-              <div className="d-flex flex-row flex-wrap justify-content-between">
-                <div className="d-flex flex-row justify-content-start align-items-baseline">
-                  <div className="headingmains text-left mr-3 mb-3">
-                    <h2 className="right aos-init pb-2 text-capitalize">
-                      {t("packages")}
-                    </h2>
-                  </div>
-                  {packages?.length > 0 && (
-                    <div className="ml-3 f-14">{`Showing  ${
-                      packages?.length === 0 ? 0 : offsetP + 1
-                    } - ${offsetP + packages?.length} of ${
-                      packageData?.TotalPackages
-                    } Result`}</div>
-                  )}
-                </div>
-                {packages?.length > 0 && (
-                  <div className="form-group d-flex flex-row justify-content-between align-items-center">
-                    <div className="text-center f-14 mr-3">{t("sort_by")}</div>
-                    <select
-                      id="inputState"
-                      className="form-control rounded-pill sort_select"
-                      value={pricePSort}
-                      onChange={handlePricePackageSort}
-                    >
-                      <option value="low">{t("price_lth")}</option>
-                      <option value="high">{t("price_htl")}</option>
-                      <option value="asc">{t("atz")}</option>
-                    </select>
-                  </div>
-                )}
-              </div>
-              {tab === "packages" && Object.keys(packageData)?.length > 0 ? (
-                <>
-                  {packageData && Array.isArray(packageData?.Packages) && (
-                    <>
-                      <div className="equal_clm h-services">
-                        {packages && (
-                          <>
-                            {packages && packages?.length > 0 ? (
-                              packages?.map((item: any, i: any) => (
-                                <div
-                                  className="infobox_wrapper pkj_wrap_box"
-                                  key={i}
-                                >
-                                  <div>
-                                    <div>
-                                      {FDiscount(
-                                        item?.MRP,
-                                        item?.SellingPrice
-                                      ) ? (
-                                        <div className="dis_icon text-center">
-                                          <img
-                                            src="/assets/img/discount.jpeg"
-                                            className="scale"
-                                          />
-                                          <span className="img_text_center">
-                                            {FDiscount(
-                                              item?.MRP,
-                                              item?.SellingPrice
-                                            )}{" "}
-                                            <br />
-                                            {t("off")}
-                                          </span>
-                                        </div>
-                                      ) : (
-                                        ""
-                                      )}
-                                      <div className="infobox_icon_container ">
-                                        <img
-                                          src="/assets/img/test_blood.png"
-                                          className="scale circle_img"
-                                        />
-                                      </div>
-                                      <h3 className="infobox_title text-uppercase">
-                                        {item?.PackageName}
-                                      </h3>
-                                      <div className="infobox_lines">
-                                        {" "}
-                                        <img
-                                          src="/assets/img/info.png"
-                                          className="scale_booknow"
-                                        />
-                                        {item?.Recommendation}
-                                      </div>
-                                      {item?.ComponentCount ? (
-                                        <div className="infobox_lines">
-                                          {" "}
-                                          <img
-                                            src="/assets/img/parameter.png"
-                                            className="scale_booknow"
-                                          />
-                                          {item?.ComponentCount
-                                            ? item?.ComponentCount
-                                            : 0}
-                                          {" Parameter(s) covered"}
-                                        </div>
-                                      ) : (
-                                        ""
-                                      )}
-                                      <div className="infobox_lines">
-                                        {" "}
-                                        <img
-                                          src="/assets/img/daily.png"
-                                          className="scale_booknow"
-                                        />
-                                        {item?.ReportTAT}
-                                      </div>
-                                      {item?.SampleReport && (
-                                        <a
-                                          href={item?.SampleReport}
-                                          target="_blank"
-                                          className="infobox_lines"
-                                        >
-                                          {" "}
-                                          <img
-                                            src="/assets/img/report.png"
-                                            className="scale_booknow"
-                                          />
-                                          {t("sample_report")}
-                                        </a>
-                                      )}
-                                      <Link
-                                        href={`${ROUTE.PACKAGEDETAILS}/${item?.Slug}`}
-                                        className="moreButton"
-                                      >
-                                        {t("more_btn")}
-                                      </Link>
-                                      <div className="d-flex mb-3 justify-content-between align-items-baseline">
-                                        <div>
-                                          {item?.MRP !== item?.SellingPrice && (
-                                            <span className="price-redtext">
-                                              &#x20B9;{`${item?.MRP}`}
-                                            </span>
-                                          )}{" "}
-                                          <span className="price-bluetext">
-                                            &#x20B9;{`${item?.SellingPrice}`}
-                                          </span>
-                                        </div>
-                                        {item?.MRP - item?.SellingPrice > 0 ? (
-                                          <div>
-                                            <span className="price-greentext">
-                                              {t("save")} &#x20B9;
-                                              {item?.MRP - item?.SellingPrice}
-                                            </span>
-                                          </div>
-                                        ) : (
-                                          ""
-                                        )}
-                                      </div>
-                                      <BookButton
-                                        type={"package"}
-                                        data={item}
-                                      />
-                                      <a
-                                        href={"#"}
-                                        className="button--hexagon booknow mt-0"
-                                        onClick={(e: any) =>
-                                          handleModalOpen(e, item?.PackageName)
-                                        }
-                                      >
-                                        <span>
-                                          GET A CALL BACK
-                                          <i
-                                            className="fa fa-long-arrow-right ml-20"
-                                            aria-hidden="true"
-                                          ></i>
-                                        </span>
-                                      </a>
-                                    </div>
-                                  </div>
-                                </div>
-                              ))
-                            ) : (
-                              <div className="singl_clm text-center text-dark fs-20">
-                                No Package Data Available
-                              </div>
-                            )}
-                          </>
-                        )}
-                      </div>
-                      {packages?.length > 0 && (
-                        <div className="row justify-content-between my-3">
-                          <div className="col-md-3"></div>
-                          <div className="col-md-9 d-flex justify-content-end align-items-center">
-                            <div className="mr-3 f-14">{`Showing  ${
-                              offsetP + 1
-                            } - ${offsetP + packages?.length} of ${
-                              packageData?.TotalPackages
-                            } Result`}</div>
-                            <div className="ml-3">
-                              <Pagination
-                                onChange={handlePaginationP}
-                                current={page}
-                                total={Math.ceil(
-                                  packageData?.TotalPackages / 2
-                                )}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </>
-                  )}
-                </>
-              ) : (
-                <SectionLoader />
-              )}
-            </div>
-          </div>
-          <div
-            id="tests"
-            className={
-              tab == "tests" ? "tab-pane fade active show" : "tab-pane fade"
-            }
-          >
             <div className="container">
               <div className="d-flex flex-row flex-wrap justify-content-between">
                 <div className="d-flex flex-row justify-content-start align-items-baseline">
@@ -649,6 +485,7 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
                         value={priceTSort}
                         onChange={handlePriceTestSort}
                       >
+                        {/* <option value="">Sort By</option> */}
                         <option value="low">{t("price_lth")}</option>
                         <option value="high">{t("price_htl")}</option>
                         <option value="asc">{t("atz")}</option>
@@ -665,9 +502,10 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
                         {tests && tests.length > 0 ? (
                           tests?.map((item: any, i: any) => (
                             <React.Fragment key={i}>
+                              {" "}
                               <div
                                 className="infobox_wrapper pkj_wrap_box"
-                                
+                                key={i}
                               >
                                 {/* {(()=> {
                                                     price = item?.SellingPrice;
@@ -728,7 +566,7 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
                                         {" "}
                                         <img
                                           src="/assets/img/parameter.png"
-                                          className="scale_bookno`w"
+                                          className="scale_booknow"
                                         />
                                         {item?.Components?.length}
                                         {" Parameter(s) covered"}
@@ -790,8 +628,8 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
                                     <a
                                       href={"#"}
                                       className="button--hexagon booknow mt-0"
-                                      onClick={(e: any) =>
-                                        handleModalOpen(e, item?.TestName)
+                                      onClick={() =>
+                                        handleModalOpen(item?.TestName)
                                       }
                                     >
                                       <span>
@@ -840,30 +678,37 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
               )}
             </div>
           </div>
-        </div>
       </section>
-      {modalIsOpen && (
-        <SendQueryModal
-          modalIsOpen={modalIsOpen}
-          setModalIsOpen={setModalIsOpen}
-          test={tab == "packages" ? false : true}
-          code={code}
-        />
-      )}
+      <SendQueryModal
+        modalIsOpen={modalIsOpen}
+        setModalIsOpen={setModalIsOpen}
+        test={tab == "packages" ? false : true}
+        code={code}
+      />
+      {/* : <SectionLoader /> */}
+            
+             {seoData?.FooterContent && (
+<section className="pathlogy-content">
+        <div className="container">
+      <div className="bg-package imp-instruction col-md-12 p-4 mb-3">
+            <SeoFooterContent seoData={seoData}/>
+            </div>
+          </div>
+      </section>
+         )}
     </React.Fragment>
   );
 };
-
-
-export const getStaticProps = async ({ locale }:{locale: string}) => {
-  let Slug = ROUTE.BOOKATEST?.replace("/", "");
+export const getServerSideProps = async ({ locale,params }:{locale: string,params:any}) => {
+  let Slug = `${ROUTE.PATHLOGYTEST}/${params.slug}`?.replace("/", "");
+  console.log(Slug)
   const data: any = await Api.post(Url.seoDetail, { Slug: Slug});
-  
+  console.log(data)
   return {
     props: {
       seoData: data?.Result?.Details || {},
       ...(await serverSideTranslations(locale, ["common"])),
     },
   };
-}
-export default BookATest;
+};
+export default PathlogyTestCity;

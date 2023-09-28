@@ -1,40 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {GetStaticPropsContext} from 'next';
-import { Fragment } from "react"
+import Link from "next/link";
+import { useRouter } from "next/router";
+
 import Slider from "react-slick";
 import { packageAction, testAction } from "../../redux/action";
+import { ROUTE } from "@/Const/Route";
+import BreadCrumb from "@/Component/Common/BreadCrumb";
+import ImgPlaceHolder from "@/Utils/imgPlaceholder";
+
+import { FDiscount } from "@/Utils/index";
 import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
-
-import { useRouter } from "next/router";
-import BreadCrumb from "@/Component/Common/BreadCrumb";
-import { FDiscount, ImgPlaceHolder } from "@/Utils";
-import SectionLoader from "@/Component/Common/Loader/SectionLoader";
-import { ROUTE } from "@/Const/Route";
-import Link from "next/link";
 import BookButton from "@/Component/Feature/BookATest/BookButton";
-import SendQueryModal from "@/Component/Feature/BookATest/SendQueryModal";
-import { useTranslation } from "next-i18next";
 import {NextPage } from 'next';
 import Api from '@/redux/common/api';
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-
 import { SITE_URL, Url } from '@/redux/common/url';
 import { NextSeo } from 'next-seo';
+
+
+import { useTranslation } from "next-i18next";
+import SectionLoader from "@/Component/Common/Loader/SectionLoader";
+import SendQueryModal from "@/Component/Feature/BookATest/SendQueryModal";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
 interface MyPageProps {
-  seoData:any;
-}
-const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
-  const  {t}  = useTranslation();
+    seoData:any;
+  }
+const BookAPackage: NextPage<MyPageProps> = ({ seoData }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
-  const router = useRouter();
-  const { query } = router;
-  const [tab, setTab] = useState<any>();
-  const [subCategory, setSubCategory] = useState<any>("");
-  const [department, setDepartment] = useState<any>("");
-  const [DepName, setDepName] = useState<any>("");
-  const [category, setCategory] = useState<any>("");
+const router = useRouter();
+  const [tab, setTab] = useState<any>("packages");
+  const [subCategory, setSubCategory] = useState("");
+  const [department, setDepartment] = useState("");
+  const [DepName, setDepName] = useState("");
+  const [category, setCategory] = useState("");
   const [pricePSort, setPricePSort] = useState("low");
   const [priceTSort, setPriceTSort] = useState("low");
   const [tests, setTests] = useState<any[]>([]);
@@ -62,32 +63,30 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
   const CityId: string = useSelector((state: any) =>
     state.dashboard.selectedCity ? state.dashboard.selectedCity : ""
   );
-  const handleModalOpen = (e: any, code: any) => {
-    e.preventDefault();
+const handleModalOpen = (code:any) => {
     setCode(code);
     setModalIsOpen(true);
-  };
-  useEffect(() => {
-    if (query?.tabs) {
-      setTab(query?.tabs);
-    } else {
-      setTab("packages");
-    }
-    if (query?.subCategoryId) {
-      setSubCategory(query?.subCategoryId);
-    }
-    if (query?.categoryId) {
-      setCategory(query?.categoryId);
-    }
-    if (query?.depId) {
-      setDepartment(query?.depId);
-    }
-    if (query?.depName) {
-      setDepName(query?.depName);
-    }
-    return () => {};
-  }, [query?.tabs, query?.subCategoryId]);
-
+}
+//   useEffect(() => {
+//     if (location?.state?.tabs) {
+//       setTab(location?.state?.tabs);
+//     } else {
+//       setTab("packages");
+//     }
+//     if (location?.state?.subCategoryId) {
+//       setSubCategory(location?.state?.subCategoryId);
+//     }
+//     if (location?.state?.categoryId) {
+//       setCategory(location?.state?.categoryId);
+//     }
+//     if (location?.state?.depId) {
+//       setDepartment(location?.state?.depId);
+//     }
+//     if (location?.state?.depName) {
+//       setDepName(location?.state?.depName);
+//     }
+//     return () => {};
+//   }, [location?.state?.tabs, location?.state?.subCategoryId]);
   const hendleTab = (e: any, value: string) => {
     e.preventDefault();
     setDepName("");
@@ -117,7 +116,16 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
         })
       );
     }
-    return () => {};
+    // return () => {
+    //   let state: any = { ...history.location.state };
+    //   if (history.location.state && history.location.state.depId) {
+    //     delete state.depId;
+    //   }
+    //   if (history.location.state && history.location.state.depName) {
+    //     delete state.depName;
+    //   }
+    //   history.replace({ ...history.location, state });
+    // };
   }, [offsetT, searchTerm, tab, subCategory, CityId]);
 
   useEffect(() => {
@@ -140,7 +148,9 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
 
   useEffect(() => {
     Tsort();
-    return () => {};
+    return () => {
+      /* history?.replace({ state: undefined }) */
+    };
   }, [testData?.Tests, priceTSort]);
 
   useEffect(() => {
@@ -171,8 +181,8 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
           (a: any, b: any) => b?.SellingPrice - a?.SellingPrice
         );
       } else if (pricePSort === "asc") {
-        newArr = [...arr]?.sort((a: any, b: any) =>
-          a?.PackageName?.localeCompare(b?.PackageName)
+        newArr = [...arr]?.sort(
+          (a: any, b: any) =>a?.PackageName?.localeCompare(b?.PackageName ,"fr", { ignorePunctuation: true })
         );
       }
       setPackages(newArr);
@@ -193,8 +203,8 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
           (a: any, b: any) => b?.SellingPrice - a?.SellingPrice
         );
       } else if (priceTSort === "asc") {
-        newArr = [...arr]?.sort((a: any, b: any) =>
-          a?.TestName?.localeCompare(b?.TestName)
+        newArr = [...arr]?.sort(
+          (a: any, b: any) => a?.TestName?.localeCompare(b?.TestName,"fr", { ignorePunctuation: true })
         );
       }
       setTests(newArr);
@@ -257,7 +267,7 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
         breakpoint: 577,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
           infinite: true,
           dots: false,
           arrows: true,
@@ -265,10 +275,10 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
       },
     ],
   };
-  
+  /* var price = 0; */
   return (
     <React.Fragment>
-      <NextSeo
+    <NextSeo
        title={seoData?.SeoTitle}
        description={seoData?.SeoDescription}
        canonical={`${SITE_URL}${router.asPath}`}
@@ -292,6 +302,7 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
          },
        ]}
     />
+    
       <BreadCrumb
         page={t("bread_tests_and_packages")}
         data={{ slug: DepName, path: "#" }}
@@ -305,7 +316,7 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
                   className="form-control rounded-pill py-2 pr-5 mr-1 bg-transparent"
                   type="search"
                   value={searchTermShow}
-                  placeholder={t("search_teast_packages") || ""}
+                  placeholder={t("search_teast_packages")}
                   id="example-search-input"
                   onChange={handleSearch}
                 />
@@ -325,12 +336,12 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
             >
               <ul className="nav nav-tabs m-0 p-0">
                 <li onClick={(e: any) => hendleTab(e, "packages")}>
-                  <a className={tab == "packages" ? "active" : ""}>
+                  <Link href={ROUTE.BOOKAPACKAGE} className={tab == "packages" ? "active" : ""}>
                     {t("packages")}
-                  </a>
+                  </Link>
                 </li>
                 <li onClick={(e: any) => hendleTab(e, "tests")}>
-                  <a className={tab == "tests" ? "active" : ""}>{t("test")} </a>
+                  <Link href={ROUTE.PATHLOGYTEST} className={tab == "tests" ? "active" : ""}>{t("test")} </Link>
                 </li>
               </ul>
             </div>
@@ -395,23 +406,16 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
           )}
         </div>
       </section>
+      {/* {((tab === "packages" && Object.keys(packageData)?.length > 0) || (tab === "tests" && Object.keys(testData)?.length > 0)) ? */}
       <section className="sub-section bg-white packageService">
         <div className="tab-content">
-          <div
-            id="packages"
-            className={
-              tab == "packages"
-                ? "tab-pane fade in active show"
-                : "tab-pane fade in"
-            }
-          >
             <div className="container">
               <div className="d-flex flex-row flex-wrap justify-content-between">
                 <div className="d-flex flex-row justify-content-start align-items-baseline">
                   <div className="headingmains text-left mr-3 mb-3">
-                    <h2 className="right aos-init pb-2 text-capitalize">
+                    <h1 className="right aos-init pb-2 text-capitalize">
                       {t("packages")}
-                    </h2>
+                    </h1>
                   </div>
                   {packages?.length > 0 && (
                     <div className="ml-3 f-14">{`Showing  ${
@@ -430,6 +434,7 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
                       value={pricePSort}
                       onChange={handlePricePackageSort}
                     >
+                      {/* <option value="">Sort By</option> */}
                       <option value="low">{t("price_lth")}</option>
                       <option value="high">{t("price_htl")}</option>
                       <option value="asc">{t("atz")}</option>
@@ -560,20 +565,18 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
                                         data={item}
                                       />
                                       <a
-                                        href={"#"}
-                                        className="button--hexagon booknow mt-0"
-                                        onClick={(e: any) =>
-                                          handleModalOpen(e, item?.PackageName)
-                                        }
-                                      >
-                                        <span>
-                                          GET A CALL BACK
-                                          <i
-                                            className="fa fa-long-arrow-right ml-20"
-                                            aria-hidden="true"
-                                          ></i>
-                                        </span>
-                                      </a>
+                                      href={"#"}
+                                      className="button--hexagon booknow mt-0"
+                                      onClick={()=> handleModalOpen(item?.PackageName)}
+                                    >
+                                      <span>
+                                        GET A CALL BACK
+                                        <i
+                                          className="fa fa-long-arrow-right ml-20"
+                                          aria-hidden="true"
+                                        ></i>
+                                      </span>
+                                    </a>
                                     </div>
                                   </div>
                                 </div>
@@ -615,255 +618,26 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
               )}
             </div>
           </div>
-          <div
-            id="tests"
-            className={
-              tab == "tests" ? "tab-pane fade active show" : "tab-pane fade"
-            }
-          >
-            <div className="container">
-              <div className="d-flex flex-row flex-wrap justify-content-between">
-                <div className="d-flex flex-row justify-content-start align-items-baseline">
-                  <div className="headingmains text-left mr-3 mb-3">
-                    <h2 className="right aos-init pb-2 text-capitalize">
-                      {t("tests")}
-                    </h2>
-                  </div>
-                  {tests?.length > 0 && (
-                    <div className="ml-3 f-14">{`${t("Showing")}  ${
-                      tests?.length === 0 ? 0 : offsetT + 1
-                    } - ${offsetT + tests?.length} ${t("of")} ${
-                      testData?.TotalTests
-                    } ${t("result")}`}</div>
-                  )}
-                </div>
-                <div>
-                  {tests?.length > 0 && (
-                    <div className="form-group d-flex flex-row justify-content-between align-items-center">
-                      <div className="text-center f-14 mr-3">
-                        {t("sort_by")}
-                      </div>
-                      <select
-                        id="inputState"
-                        className="form-control col-8 rounded-pill sort_select"
-                        value={priceTSort}
-                        onChange={handlePriceTestSort}
-                      >
-                        <option value="low">{t("price_lth")}</option>
-                        <option value="high">{t("price_htl")}</option>
-                        <option value="asc">{t("atz")}</option>
-                      </select>
-                    </div>
-                  )}
-                </div>
-              </div>
-              {tab === "tests" && Object.keys(testData)?.length > 0 ? (
-                <>
-                  {testData && Array.isArray(testData?.Tests) && (
-                    <>
-                      <div className="equal_clm h-services organslider">
-                        {tests && tests.length > 0 ? (
-                          tests?.map((item: any, i: any) => (
-                            <React.Fragment key={i}>
-                              <div
-                                className="infobox_wrapper pkj_wrap_box"
-                                
-                              >
-                                {/* {(()=> {
-                                                    price = item?.SellingPrice;
-                                                    if(CityId && item?.CitywisePrices && item?.CitywisePrices?.length > 0) {
-                                                        item?.CitywisePrices.map((ele:any) => {
-                                                            if(ele.availability == 1 && ele?.city_price && ele?.city_id == CityId) {
-                                                                price = ele?.city_price;
-                                                            }
-                                                        })
-                                                    }
-                                                })()} */}
-                                <div>
-                                  <div>
-                                    {FDiscount(
-                                      item?.MRP,
-                                      item?.SellingPrice
-                                    ) ? (
-                                      <div className="dis_icon text-center">
-                                        <img
-                                          src="/assets/img/discount.jpeg"
-                                          className="scale"
-                                        />
-                                        <span className="img_text_center">
-                                          {FDiscount(
-                                            item?.MRP,
-                                            item?.SellingPrice
-                                          )}{" "}
-                                          <br />
-                                          {t("off")}
-                                        </span>
-                                      </div>
-                                    ) : (
-                                      ""
-                                    )}
-                                    <div className="infobox_icon_container ">
-                                      <img
-                                        src="/assets/img/test_blood.png"
-                                        className="scale circle_img"
-                                      />
-                                    </div>
-                                    <h3 className="infobox_title text-uppercase">
-                                      {item?.TestName}
-                                    </h3>
-                                    {item?.Recommendation ? (
-                                      <div className="infobox_lines">
-                                        {" "}
-                                        <img
-                                          src="/assets/img/info.png"
-                                          className="scale_booknow"
-                                        />
-                                        {item?.Recommendation}
-                                      </div>
-                                    ) : (
-                                      ""
-                                    )}
-                                    {item?.Components?.length > 0 ? (
-                                      <div className="infobox_lines">
-                                        {" "}
-                                        <img
-                                          src="/assets/img/parameter.png"
-                                          className="scale_bookno`w"
-                                        />
-                                        {item?.Components?.length}
-                                        {" Parameter(s) covered"}
-                                      </div>
-                                    ) : (
-                                      ""
-                                    )}
-                                    <div className="infobox_lines">
-                                      {" "}
-                                      <img
-                                        src="/assets/img/daily.png"
-                                        className="scale_booknow"
-                                      />
-                                      {item?.ReportTAT}
-                                    </div>
-                                    {item?.SampleReport && (
-                                      <a
-                                        href={item?.SampleReport}
-                                        target="_blank"
-                                        className="infobox_lines"
-                                      >
-                                        {" "}
-                                        <img
-                                          src="/assets/img/report.png"
-                                          className="scale_booknow"
-                                        />
-                                        {t("sample_report")}
-                                      </a>
-                                    )}
-                                    <Link
-                                      href={`${ROUTE.TESTDETAILS}/${item?.Slug}`}
-                                      className="moreButton"
-                                    >
-                                      {t("plus_more")}
-                                    </Link>
-                                    <div className="d-flex mb-3 justify-content-between align-items-baseline">
-                                      <div>
-                                        {item?.MRP !== item?.SellingPrice && (
-                                          <span className="price-redtext">
-                                            &#x20B9;{`${item?.MRP}`}
-                                          </span>
-                                        )}{" "}
-                                        <span className="price-bluetext">
-                                          &#x20B9;{`${item?.SellingPrice}`}
-                                        </span>
-                                      </div>
-                                      {item?.MRP - item?.SellingPrice > 0 ? (
-                                        <div>
-                                          <span className="price-greentext">
-                                            {t("save")} &#x20B9;
-                                            {item?.MRP - item?.SellingPrice}
-                                          </span>
-                                        </div>
-                                      ) : (
-                                        ""
-                                      )}
-                                    </div>
-                                    <BookButton type={"test"} data={item} />
-                                    <a
-                                      href={"#"}
-                                      className="button--hexagon booknow mt-0"
-                                      onClick={(e: any) =>
-                                        handleModalOpen(e, item?.TestName)
-                                      }
-                                    >
-                                      <span>
-                                        GET A CALL BACK
-                                        <i
-                                          className="fa fa-long-arrow-right ml-20"
-                                          aria-hidden="true"
-                                        ></i>
-                                      </span>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                            </React.Fragment>
-                          ))
-                        ) : (
-                          <div className="singl_clm text-center text-dark fs-20">
-                            No Test Data Available
-                          </div>
-                        )}
-                      </div>
-                      {tests?.length > 0 && (
-                        <div className="row justify-content-between my-3">
-                          <div className="col-md-3"></div>
-                          <div className="col-md-9 d-flex justify-content-end align-items-center">
-                            <div className="mr-3 f-14">{`${t("Showing")}  ${
-                              offsetT + 1
-                            } - ${offsetT + tests?.length} ${t("of")} ${
-                              testData?.TotalTests
-                            } ${t("result")}`}</div>
-                            <div className="ml-3">
-                              <Pagination
-                                onChange={handlePaginationT}
-                                current={page}
-                                total={Math.ceil(testData?.TotalTests / 2)}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </>
-                  )}
-                </>
-              ) : (
-                <SectionLoader />
-              )}
-            </div>
-          </div>
-        </div>
       </section>
-      {modalIsOpen && (
-        <SendQueryModal
-          modalIsOpen={modalIsOpen}
-          setModalIsOpen={setModalIsOpen}
-          test={tab == "packages" ? false : true}
-          code={code}
-        />
-      )}
+      <SendQueryModal
+        modalIsOpen={modalIsOpen}
+        setModalIsOpen={setModalIsOpen}
+        test={tab == "packages" ? false : true}
+        code={code}
+      />
+      {/* : <SectionLoader />
+            } */}
     </React.Fragment>
   );
 };
-
-
-export const getStaticProps = async ({ locale }:{locale: string}) => {
-  let Slug = ROUTE.BOOKATEST?.replace("/", "");
-  const data: any = await Api.post(Url.seoDetail, { Slug: Slug});
-  
-  return {
-    props: {
-      seoData: data?.Result?.Details || {},
-      ...(await serverSideTranslations(locale, ["common"])),
-    },
+export const getServerSideProps = async ({ locale }:{locale: string}) => {
+    let Slug = ROUTE.BOOKAPACKAGE?.replace("/", "");
+    const data: any = await Api.post(Url.seoDetail, { Slug: Slug});
+    return {
+      props: {
+        seoData: data?.Result?.Details || {},
+        ...(await serverSideTranslations(locale, ["common"])),
+      },
+    };
   };
-}
-export default BookATest;
+export default BookAPackage;

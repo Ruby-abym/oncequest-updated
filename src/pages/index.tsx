@@ -82,7 +82,7 @@ const { locale } = useRouter();
          },
        ]}
     />
-      {/* <SeoAdd slug={""} /> */}
+      
       <section className="headslider desk-view" data-aos="fade-right" data-aos-duration="1100" style={{ position: "relative", zIndex: 13 }}>
         <div className="sliderbox">
          <div className="slidercont111 owl-carousel">

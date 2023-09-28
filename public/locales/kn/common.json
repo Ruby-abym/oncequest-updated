@@ -75,7 +75,7 @@
 "Warangal":"ವಾರಂಗಲ್",
 "Jhansi":"ಝಾನ್ಸಿ",
 "Nashik":"ನಾಸಿಕ್",
-    "Warangal":"ವಾರಂಗಲ್",
+    
     "patient": "ರೋಗಿಯ",
     "doctors": "ವೈದ್ಯರು",
     "wellness": "ಕ್ಷೇಮ",
@@ -1017,9 +1017,9 @@
     "clinical_trial_bread": "clinical-trial",
     "clinical_trial": "Clinical Trial",
     "privilege_membership_card_bread": "privilege-membership-card",
-    "privilege_membership_card": "Privilege Membership Card",
+    "privilege_membership_card": "ವಿಶೇಷ ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್",
     "privilege_membership_form": "ಸದಸ್ಯತ್ವ ವಿನಂತಿ ನಮೂನೆ",
-    "privilege_membership_card_doctor": "Privilege Membership Card Doctor",
+    "privilege_membership_card_doctor": "ವಿಶೇಷ ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್ ಡಾಕ್ಟರ್",
     "privilege_membership_card_doctor_bread": "privilege-membership-card-doctor",
     "name_doctor": "ವೈದ್ಯರ ಹೆಸರು",
     "images": {
