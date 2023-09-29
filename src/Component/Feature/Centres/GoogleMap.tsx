@@ -1,20 +1,31 @@
 import { useState } from 'react';
-const GoogleMap = require('react-google-maps').GoogleMap;
-const Marker = require('react-google-maps').Marker;
+// const GoogleMap = require('react-google-maps').GoogleMap;
+// const Marker = require('react-google-maps').Marker;
+import SectionLoader from '@/Component/Common/Loader/SectionLoader';
 const InfoWindow = require('react-google-maps').InfoWindow
 import {
   withScriptjs,
   withGoogleMap,
 
 } from 'react-google-maps';
+import {
+    GoogleMap,
+    useLoadScript,
+    Marker,
+    Autocomplete,
+  } from "@react-google-maps/api";
 
-
-const SIZE = 20;
+const SIZE = 320;
 const MapWithMarker = ((props: any) => {
   const [popupInfo, setPopupInfo] = useState<any>("");
   let arr: any[] = [];
   let lat: number = 0;
   let lng: number = 0;
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: 'AIzaSyBdZRmvc_EiOcYC2w9uIzO4h3xaq6Rebds',
+    libraries: ["places"],
+  });
+  if (!isLoaded) return  <SectionLoader/>;
   if (Object.values(props) && Object.values(props)?.length > 0) {
     Object.values(props)?.map((item: any) => {
       if (
@@ -33,8 +44,8 @@ const MapWithMarker = ((props: any) => {
   return (
     // <>hello</>
     <GoogleMap
-      defaultZoom={5}
-      defaultCenter={{ lat: lat / arr.length || 22.729860, lng: lng / arr.length || 75.898130 }}
+      zoom={5}
+      center={{ lat: lat / arr.length || 22.729860, lng: lng / arr.length || 75.898130 }}
     >
       {Object.keys(props) && Object.values(props)?.map((item: any, i: any) => {
         let marker = item;
@@ -81,6 +92,6 @@ const MapWithMarker = ((props: any) => {
   )
 }
 );
-export default withScriptjs(withGoogleMap(MapWithMarker));
+export default MapWithMarker;
 
 
