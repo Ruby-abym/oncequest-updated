@@ -1375,7 +1375,7 @@ function Header(props: any) {
                             <Link
                               href={{
                                 pathname: ROUTE.BOOKATEST,
-                                 query:{tab:"tests"}
+                                 query:{tabs:"tests"}
                               }}
                               as={ROUTE.BOOKATEST}
                               onClick={(e: any) => removeClass()}

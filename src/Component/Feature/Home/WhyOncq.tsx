@@ -8,7 +8,7 @@ const WhyOncq = () => {
           <h2 className="right aos-init pb-2">{t("why_oncquest")}</h2>
           <div className="row">
             <div className="">
-              <div className="row whyOnq">
+              <div className="row">
                 <div className="col-sm-6 col-lg-3">
                   <img src={t("images.home.whyOnq1") || ""} alt="" />
                   <h6>{t("highly_advanced_laboratory")}</h6>

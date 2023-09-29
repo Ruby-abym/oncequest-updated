@@ -14,8 +14,11 @@ import Api from '@/redux/common/api';
 import { SITE_URL, Url } from '@/redux/common/url';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-// import MapWithMarker from '@/Component/Feature/Centres/GoogleMap';
 
+
+const MapWithMarker = dynamic(() => import('@/Component/Feature/Centres/GoogleMap'), {
+    ssr:false
+  })
 // import WaitScreen from '../LodingScreen/WaitScreen';
 // import MapGl from '../MapGl/MapGl';
 interface MyPageProps {
@@ -25,15 +28,15 @@ import CenterTiming from '@/Component/Feature/Centres/CenterTiming';
 import { useTranslation } from 'next-i18next';
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import dynamic from 'next/dynamic';
 interface MyPageProps {
     seoData:any;
   }
 
 const Labs: NextPage<MyPageProps> = ({ seoData }) =>{
-    const  {t}  = useTranslation();
+    const { t } = useTranslation();
     const dispatch = useDispatch();
-    // const location = useLocation<any>();
-    const router = useRouter()
+   const router = useRouter()
     const [limit, setLimit] = useState<any>(20);
     const [increseBy, setIncreseBy] = useState<any>(20);
     const [related, setRelated] = useState<boolean>(false);
@@ -54,7 +57,7 @@ const Labs: NextPage<MyPageProps> = ({ seoData }) =>{
     const state: any[] = useSelector((state: any) => state.dashboard.state);
     const city: any[] = useSelector((state: any) => state.dashboard.city);
     const nearestCenters = localStoreCity == "" ? nearCenterData : [];
-    
+    console.log(centerData)
     useEffect(() => {
         window?.scrollTo(0, 0);
         setLocalStoreCity(getSelectedCity());
@@ -196,6 +199,7 @@ const Labs: NextPage<MyPageProps> = ({ seoData }) =>{
         }
         return () => { };
     }, [centerData]);
+    console.log(altitude)
 
     const handleSearch = (e: any) => {
         setRelated(false);
@@ -273,8 +277,8 @@ const Labs: NextPage<MyPageProps> = ({ seoData }) =>{
                                     <div className="form-group">
                                         <select className="form-control rounded-pill" value={stateId} onChange={(e: any) => handleStateChange(e)}>
                                             <option value="">{t("select_state")}</option>
-                                            {state && state?.length > 0 && state?.map((item: any) => (
-                                                <option className="text-uppercase" value={item?.Id} key={item?.Id}>{t(item?.Name)}</option>
+                                            {state && state?.length > 0 && state?.map((item: any,i:number) => (
+                                                <option  className="text-uppercase" value={item?.Id} key={item?.Id}>{t(item?.Name)}</option>
                                             ))}
                                         </select>
                                     </div>
@@ -303,14 +307,7 @@ const Labs: NextPage<MyPageProps> = ({ seoData }) =>{
                                         </div>
                                     </div>
                                 </div>
-                                {/* <div className="col-sm-4">
-                                        <div className="form-group">
-                                            <a href='#' onClick={(e: any) => handleGetUserLatLng(e)}>
-                                                <img className="scale nearby_icon" src="/assets/img/loc_icon.png" width="17.3px" height="17.3px" />
-                                                <button placeholder="Nearby" style={{ color: "#495057" }} className="form-control  rounded-pill py-2 pl-2 ml-1 bg-transparent">Nearby</button>
-                                            </a>
-                                        </div>
-                                    </div> */}
+                               
                             </div>
                         </div>
                     </div>
@@ -322,7 +319,7 @@ const Labs: NextPage<MyPageProps> = ({ seoData }) =>{
                             {Object.keys(centerData).length > 0 ?
                                 <>
                                     {centerData && centerData?.Centres?.length > 0 ? centerData?.Centres?.map((item: any, index: any) => (
-                                        <>
+                                        <React.Fragment key={index}>
                                             <div className="lab_list h-services" key={index}>
                                                 <div className="infobox_wrapper lab_wrapper">
                                                     <div className="lab_flex_pad">
@@ -370,7 +367,7 @@ const Labs: NextPage<MyPageProps> = ({ seoData }) =>{
                                                     <Link className="button-read-more pt-2 pb-2 text-dark f-15" href={`${ROUTE.CENTERDETAILS}/${item?.Slug}`}>{t("know_more")}<img src="/assets/img/arrow-read-dark.svg" className="scale_booknow ml-3" /></Link>
                                                 </div>
                                             </div>
-                                        </>
+                                        </React.Fragment>
                                     ))
                                         :
                                         (
@@ -462,7 +459,13 @@ const Labs: NextPage<MyPageProps> = ({ seoData }) =>{
                         <div className="col-md-5">
                             {Object.keys(centerData).length > 0 ?
                                 <>
-                                    {/* {altitude.length > 0 && <MapWithMarker {...altitude} />} */}
+                                    {<MapWithMarker {...altitude} 
+                                    googleMapURL= "https://maps.googleapis.com/maps/api/js?key=AIzaSyBdZRmvc_EiOcYC2w9uIzO4h3xaq6Rebds&v=3&libraries=geometry,places"
+                                    loadingElement={<div style={{ height: `100%`, maxHeight: "700px", minHeight: "500px" }} />}
+                                    containerElement={<div style={{ height: `100%`, maxHeight: "700px", minHeight: "500px" }} />}
+                                    mapElement={<div style={{ height: `100%`, maxHeight: "700px", minHeight: "500px" }} />} 
+                                   
+                                    />}
                                 </>
                                 :
                                 <SectionLoader />
@@ -485,3 +488,4 @@ export const getServerSideProps = async ({ locale }:{locale: string}) => {
     };
   };
 export default Labs
+
