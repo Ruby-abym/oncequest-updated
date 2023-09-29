@@ -97,7 +97,7 @@ const PathlogyTestCity: NextPage<MyPageProps> = ({ seoData }) => {
     let _slug = (ROUTE.PATHLOGYTEST + '/' + slug).replace("/", "");
     Api.post(Url.seoDetail, {Slug: _slug}).then((res:any) => {
       if (!res?.Result?.Details?.PageName) {
-        // router.push(ROUTE.ERRORPAGE);
+        router.push('/404');
       }
     });
   }

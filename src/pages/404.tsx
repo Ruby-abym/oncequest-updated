@@ -3,11 +3,12 @@ import Link from "next/link";
 import { ROUTE } from '@/Const/Route';
 
 import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 function Custom404() {
   const {t}= useTranslation();
   return (
     <section>
-      <div className="error-sec mt-3">
+      <div className="error-sec">
         <div className="container">
           <div className="error-img text-center">
           <img src="../assets/img/404error-img.png" alt="404error" />
@@ -20,5 +21,13 @@ function Custom404() {
     </section>
   );
 }
+export const getStaticProps = async ({ locale }:{locale: string}) => {
 
+  return {
+    props: {
+     
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
+};
 export default Custom404;
