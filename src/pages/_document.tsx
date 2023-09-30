@@ -4,8 +4,8 @@ import Document, {
   Head,
   Main,
   NextScript,
- 
-} from "next/document";
+ } from "next/document";
+import Script from "next/script";
 
 class MyDocument extends Document {
   render() {
@@ -16,6 +16,11 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+         
+    <Script src="../Assets/js/jquery-3.4.1.min.js"  strategy="beforeInteractive"></Script>
+    <Script src="../Assets/js/popper.min.js" strategy="beforeInteractive"></Script>
+    <Script src="../Assets/js/bootstrap.min.js" strategy="beforeInteractive"></Script>
+    
         </body>
       </Html>
     );

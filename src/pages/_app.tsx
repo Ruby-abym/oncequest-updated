@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import Layout from "@/Component/Common/Layout";
 import configureStore from "@/redux/store";
 import { DefaultSeo } from "next-seo";
-
+import Script from "next/script";
 const store = configureStore();
 const App = ({ Component, pageProps }: AppProps) => {
  
@@ -47,7 +47,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             </Layout>
           </div>
         </Provider>
-      
+        
     </>
   );
 }
