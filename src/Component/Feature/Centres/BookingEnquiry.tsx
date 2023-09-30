@@ -1,6 +1,6 @@
 import moment from 'moment';
 import DatePicker from "react-datepicker";
-import { useParams } from 'next/navigation';
+
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { submitAction } from '../../../redux/action';
@@ -16,9 +16,10 @@ const initialValue = { Name: "", Mobile: "", Gender: "", DOB: null, Address: "" 
 const BookingEnquiry = (props: any) => {
     const  {t} = useTranslation();
     const { centerId } = props;
-    const { slug } :any = useParams();
+    
     const dispatch = useDispatch();
     const router = useRouter();
+    const {slug}:any = router.query;
     const datepickerRef = useRef(null);
     const [file, setFile] = useState<any[]>([]);
     const [filePath, setFilePath] = useState<any>("");

@@ -15,7 +15,7 @@ import {
     maxHeight:"700px",
     width:"100%",
   }
-const SIZE = 20;
+const SIZE = 400;
 const MapWithMarker = ((props: any) => {
   const [popupInfo, setPopupInfo] = useState<any>("");
   let arr: any[] = [];

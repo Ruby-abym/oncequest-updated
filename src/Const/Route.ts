@@ -1,3 +1,4 @@
+
 export const ROUTE = {
     HOME: "/",
     SIGNUP: "/signup",
@@ -10,12 +11,11 @@ export const ROUTE = {
     DEPARTMENTDETAILS: "/department",
     DEPARTMENT: "/departments",
     BOOKATEST: "/book-a-test",
+    BOOKAPACKAGE: "/health-packages",
     TESTDETAILS: "/test",
     PACKAGEDETAILS: "/package",
     CENTERDETAILS: "/centre",
     CENTER: "/centres",
-    PATHLOGYTEST: '/pathology-test',
-    BOOKAPACKAGE: "/health-packages",
     DOWNLOADREPORT: "/download-report",
     GENERALENQUIRY: "/general-enquiry",
     OFFER: "/offers",
@@ -44,7 +44,6 @@ export const ROUTE = {
     HOMECOLLECTION: "/home-collection",
     BECOMWEPARTNER: "/partner-with-us",
     BECOMEVENDOR: "/vendor-with-us",
-    PATHSHALA: "/paathshala",
     NEUROLOGY: "/neurology",
     ALLERGY: "/allergy",
     MAMAPRINT: "/mamma-print",
@@ -59,5 +58,10 @@ export const ROUTE = {
     VIDEOSECTION: '/youtube-video-section',
     CLINICALTRIAL: '/clinical-trial',
     PRIVILEGEMEMBERSHIP: '/privilege-membership-card',
-    PRIVILEGEMEMBERSHIPDOCTOR: '/privilege-membership-card-doctor'
+    PRIVILEGEMEMBERSHIPDOCTOR: '/privilege-membership-card-doctor',
+    PATHLOGYTEST: '/pathology-test',
+    // PATHLOGYTESTLOCAL: '/book-a-test',
+    ERRORPAGE: '/404error'
+
+
 }
