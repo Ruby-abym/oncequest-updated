@@ -461,9 +461,9 @@ const Labs: NextPage<MyPageProps> = ({ seoData }) =>{
                                 <>
                                     {<MapWithMarker {...altitude} 
                                     googleMapURL= "https://maps.googleapis.com/maps/api/js?key=AIzaSyBdZRmvc_EiOcYC2w9uIzO4h3xaq6Rebds&v=3&libraries=geometry,places"
-                                    loadingElement={<div style={{ height: `100%`, maxHeight: "700px", minHeight: "500px" }} />}
-                                    containerElement={<div style={{ height: `100%`, maxHeight: "700px", minHeight: "500px" }} />}
-                                    mapElement={<div style={{ height: `100%`, maxHeight: "700px", minHeight: "500px" }} />} 
+                                    loadingElement={<div style={{ height: "500px",  }} />}
+                                    containerElement={<div style={{ height: "500px", }} />}
+                                    mapElement={<div style={{ height: `30%`, maxHeight: "700px", minHeight: "500px" }} />} 
                                    
                                     />}
                                 </>

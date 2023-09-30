@@ -1,13 +1,8 @@
 import { useState } from 'react';
-// const GoogleMap = require('react-google-maps').GoogleMap;
-// const Marker = require('react-google-maps').Marker;
+
 import SectionLoader from '@/Component/Common/Loader/SectionLoader';
 const InfoWindow = require('react-google-maps').InfoWindow
-import {
-  withScriptjs,
-  withGoogleMap,
 
-} from 'react-google-maps';
 import {
     GoogleMap,
     useLoadScript,
@@ -15,7 +10,12 @@ import {
     Autocomplete,
   } from "@react-google-maps/api";
 
-const SIZE = 320;
+  const containerStyle={
+    height:"100%",
+    maxHeight:"700px",
+    width:"100%",
+  }
+const SIZE = 20;
 const MapWithMarker = ((props: any) => {
   const [popupInfo, setPopupInfo] = useState<any>("");
   let arr: any[] = [];
@@ -46,6 +46,7 @@ const MapWithMarker = ((props: any) => {
     <GoogleMap
       zoom={5}
       center={{ lat: lat / arr.length || 22.729860, lng: lng / arr.length || 75.898130 }}
+      mapContainerStyle={containerStyle}
     >
       {Object.keys(props) && Object.values(props)?.map((item: any, i: any) => {
         let marker = item;
