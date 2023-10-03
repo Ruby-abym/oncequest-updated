@@ -82,6 +82,14 @@ https://cdn.jsdelivr.net/npm/react-helmet@6.1.0/lib/Helmet.min.js
       __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=UA-229984587-1" height="0" width="0" style="display: none; visibility: hidden;" />`,
     }}
   />
+   <Script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=AW-674299531"
+    ></Script>
+     <Script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-229984587-1"
+    ></Script>
           <Script
             src="./assets/js/jquery-3.4.1.min.js"
             crossOrigin="anonymous"
