@@ -17,9 +17,9 @@ class MyDocument extends Document {
           <Main />
           <NextScript />
          
-    <Script src="../Assets/js/jquery-3.4.1.min.js" type="text/javascript" strategy="afterInteractive"></Script>
-    <Script src="../Assets/js/popper.min.js" type="text/javascript" strategy="afterInteractive"></Script>
-    <Script src="../Assets/js/bootstrap.min.js" type="text/javascript" strategy="afterInteractive"></Script>
+    <Script src="./assets/js/jquery-3.4.1.min.js" crossOrigin="anonymous" type="text/javascript" strategy="beforeInteractive"></Script>
+    <Script src="./assets/js/popper.min.js" crossOrigin="anonymous" type="text/javascript" strategy="beforeInteractive"></Script>
+    <Script src="./assets/js/bootstrap.min.js" type="text/javascript" strategy="beforeInteractive"></Script>
     
         </body>
       </Html>
