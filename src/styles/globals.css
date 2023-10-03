@@ -41,6 +41,7 @@ body{
 .welcome-modal .modal-header {
   background-color: #024682;
 }
+
 .modal-header-pb {
   padding-bottom: 0px;
 }
@@ -69,6 +70,9 @@ body{
 }
 .mt-0-pop {
   margin-top: 0px !important;
+}
+.pop-up-img {
+  width: 245px;
 }
 .error-img img {
   margin-top: 7rem !important;

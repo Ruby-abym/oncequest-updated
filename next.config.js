@@ -7,7 +7,7 @@ module.exports = {
     ignoreDuringBuilds: true,
   },
   i18n,
-  trailingSlash: true,
+  trailingSlash: false,
   experimental: {
     largePageDataBytes: 128 * 100000,
   }
