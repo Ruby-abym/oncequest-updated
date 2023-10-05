@@ -144,6 +144,7 @@ function BookTest(props: any) {
                                                 subCategoryId: sub.Id,
                                               },
                                             }}
+                                            as={ROUTE.BOOKATEST}
                                           >
                                             <img
                                               src="../assets/img/arrow-read.svg"
@@ -207,6 +208,7 @@ function BookTest(props: any) {
                                                     subCategoryId: sub.Id,
                                                   },
                                                 }}
+                                                as={ROUTE.BOOKATEST}
                                               >
                                                 <img
                                                   src="a"
@@ -231,6 +233,7 @@ function BookTest(props: any) {
                                 pathname: ROUTE.BOOKATEST,
                                 query: { tabs: "tests", categoryId: tab },
                               }}
+                              as={ROUTE.BOOKATEST}
                             >
                               <span>{t("explore_all")}</span>
                               <svg

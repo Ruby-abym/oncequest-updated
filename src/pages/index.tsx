@@ -135,7 +135,7 @@ const { locale } = useRouter();
                 <ul>
                   <li><Link href={ROUTE.HOMECOLLECTION} className="button--hexagon active"><span><img src="/assets/img/collection.png" className="search-scale" />
                   {t("home")} <i className="fa fa-long-arrow-right" aria-hidden="true"></i></span> </Link></li>
-                  <li><Link href={{ pathname: ROUTE.BOOKATEST, query: { tabs: "tests", categoryId: "", subCategoryId: "" } }} className="button--hexagon"><span> <img src="../assets/img/test.png" className="search-scale" />
+                  <li><Link href={{ pathname: ROUTE.BOOKATEST, query: { tabs: "tests", categoryId: "", subCategoryId: "" } }} as={ROUTE.BOOKATEST} className="button--hexagon"><span> <img src="../assets/img/test.png" className="search-scale" />
                   {t("find")}<i className="fa fa-long-arrow-right" aria-hidden="true"></i></span></Link></li>
                   <li><a href="https://itd.oncquest.net/Oncquest/Design/onlinelab/" target="_blank" rel="noopener noreferrer" className="button--hexagon"><span>  <img src="../assets/img/report.png" className="search-scale" />
                   {t("download")}<i className="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></li>

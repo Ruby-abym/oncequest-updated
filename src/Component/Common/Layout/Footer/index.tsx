@@ -169,6 +169,7 @@ function Footer(props: any) {
                             subCategoryId: "",
                           },
                         }}
+                        as={ROUTE.BOOKATEST}
                       >
                         {t("test_book")}
                       </Link>
@@ -182,6 +183,7 @@ function Footer(props: any) {
                           pathname: ROUTE.CENTER,
                           query: { nearBy: true },
                         }}
+                        as={ROUTE.CENTER}
                       >
                         {t("center")}
                       </Link>
@@ -196,6 +198,7 @@ function Footer(props: any) {
                             subCategoryId: "",
                           },
                         }}
+                        as={ROUTE.BOOKATEST}
                       >
                         {t("package")}
                       </Link>
@@ -209,6 +212,7 @@ function Footer(props: any) {
                           pathname: ROUTE.TESTIMONIAL,
                           query: { type: 1 },
                         }}
+                        as={ROUTE.TESTIMONIAL}
                       >
                         {t("testi")}
                       </Link>
@@ -273,6 +277,7 @@ function Footer(props: any) {
                           pathname: ROUTE.TESTIMONIAL,
                           query: { type: 2 },
                         }}
+                        as={ROUTE.TESTIMONIAL}
                       >
                         {t("testi")}
                       </Link>
