@@ -11,6 +11,7 @@ export const ROUTE = {
     DEPARTMENT: "/departments",
     BOOKATEST: "/book-a-test",
     TESTDETAILS: "/test",
+    PAYMENT_THANKYOU:"/payment-thank-you",
     PACKAGEDETAILS: "/package",
     CENTERDETAILS: "/centre",
     CENTER: "/centres",
@@ -53,11 +54,9 @@ export const ROUTE = {
     KOLKATALAB: "/kolkata-lab",
     CANCER: '/cancer',
     PRENATALTESTING: '/prenatal-testing',
-    BOOKAPACKAGE: "/health-packages",
     LUDHIANALAB: '/ludhiana-lab',
     VIDEOSECTION: '/youtube-video-section',
     CLINICALTRIAL: '/clinical-trial',
     PRIVILEGEMEMBERSHIP: '/privilege-membership-card',
-    PRIVILEGEMEMBERSHIPDOCTOR: '/privilege-membership-card-doctor',
-    ERRORPAGE:'/404'
+    PRIVILEGEMEMBERSHIPDOCTOR: '/privilege-membership-card-doctor'
 }

@@ -78,7 +78,7 @@ const CartBox = ({ totalPayble = 0, setTotalPayble }: ICardBox) => {
   };
   const cartTotal = (mrp: boolean = false) => {
     return cardEntry?.reduce(
-      (total, item) => Number(mrp ? item?.MRP : item?.SellingPrice) + total,
+      (total, item) => Number(mrp ? item?.MRP : item?.SellingPrice) + Number(total),
       0
     );
   };

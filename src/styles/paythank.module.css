@@ -1,0 +1,23 @@
+.background_box {
+    font-family: "Poppins", sans-serif;
+    background: rgba(10, 4, 4, 0.58) 0% 0% no-repeat padding-box;
+    padding-bottom: 60px;
+    padding-top: 40px;
+}
+.thankyou_box {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 20px #00000029;
+    border-radius: 10px;
+    margin:auto;
+    max-width: 650px;
+    padding: 20px 80px;
+}
+.payment_done {
+    color: #514E4E;
+    font-weight: 500;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:10px;
+}

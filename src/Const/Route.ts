@@ -2,8 +2,10 @@
 export const ROUTE = {
     HOME: "/",
     SIGNUP: "/signup",
+    MYPROFILE:"/my-profile",
     LOGIN: "/login",
     THANKYOU: "/thank-you",
+    PAYMENT_THANKYOU:"/payment-thank-you",
     UPLOADPRESCRIPTION: "/upload-prescription",
     BROCHURES: "/brochures",
     TEAM: "/team",
