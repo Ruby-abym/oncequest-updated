@@ -242,3 +242,58 @@ export const validateGurugramLab = Yup.object().shape({
     CityId: Yup.string()
         .required("City is required"),
 })
+export const validatPHP = Yup.object().shape({
+    Name: Yup.string()
+      .required("Name is required")
+      .min(2, "Min 2 character required"),
+    Mobile: Yup.string()
+      .required("Mobile is required")
+      .min(10, "Enter only 10 Digit")
+      .max(10, "Enter only 10 Digit"),
+    CityId: Yup.string().required("City is required"),
+    QueryNature: Yup.string().required("QueryNature  is required"),
+    Message: Yup.string().required("Message is required"),
+  });
+  export const validateEditProfile = Yup.object().shape({
+    FirstName: Yup.string()
+      .required("First Name is required")
+      .min(2, "Min 2 character required"),
+    Mobile: Yup.string()
+      .required("Mobile is required")
+      .min(10, "Enter only 10 Digit")
+      .max(10, "Enter only 10 Digit"),
+    EmailId: Yup.string().required("Email Id is required"),
+    Gender: Yup.string().required("Gender is required"),
+    DOB: Yup.string().required("Date of birth is required"),
+  });
+  export const validateEditMember = Yup.object().shape({
+    FirstName: Yup.string()
+      .required("First Name is required")
+      .min(2, "Min 2 character required"),
+    Mobile: Yup.string()
+      .required("Mobile is required")
+      .min(10, "Enter only 10 Digit")
+      .max(10, "Enter only 10 Digit"),
+    Relation: Yup.string().required("Relation is required"),
+    DOB: Yup.string().required("Date of birth is required"),
+  });
+  export const validateEditAddress = Yup.object().shape({
+    Address1: Yup.string()
+      .required("Colony/Area/Sector is required")
+      .min(2, "Min 2 character required"),
+    Address2: Yup.string().required("House No is required"),
+    CityState: Yup.string().required("City & State is required"),
+    Pincode: Yup.string()
+      .required("Pincode is required")
+      .min(6, "Min 6 digit required"),
+  });
+  export const validateCancleOrder = Yup.object().shape({
+    Reason: Yup.string().required("Reason is required"),
+    Message: Yup.string().when("Reason", (Reason:any, schema) => {
+      if (Reason == "Other") {
+        return schema.required("Message is required");
+      } else {
+        return schema;
+      }
+    }),
+  });
