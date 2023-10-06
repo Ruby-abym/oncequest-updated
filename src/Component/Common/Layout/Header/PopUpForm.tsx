@@ -173,11 +173,11 @@ const WelcomePopup = (props: any) => {
                             onBlur={handleBlur}
                             value={values?.Message}
                           ></textarea>
-                          {touched?.Message && errors?.Message && (
+                          {/* {touched?.Message && errors?.Message && (
                             <span className="error_message">
                               {t(errors?.Message as any)}
                             </span>
-                          )}
+                          )} */}
                         </div>
                         <button
                           type="submit"

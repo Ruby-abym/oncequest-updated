@@ -231,7 +231,7 @@ const HomeCollectionForm: NextPage<MyPageProps> = ({seoData})=> {
                                 onBlur={handleBlur}
                                 value={values.CityId}
                               >
-                                <option value="">{t("city")}</option>
+                                <option value="">{t("city")}*</option>
                                 {cityData &&
                                   cityData.length > 0 &&
                                   cityData?.map((item: any, i: any) => (
@@ -278,7 +278,7 @@ const HomeCollectionForm: NextPage<MyPageProps> = ({seoData})=> {
                                   showYearDropdown
                                   peekNextMonth
                                   dropdownMode="select"
-                                  placeholderText={t("preferred_date")}
+                                  placeholderText={`${t("preferred_date")}*`}
                                   onChangeRaw={(e: any) => e.preventDefault()}
                                 />
                                 <span>

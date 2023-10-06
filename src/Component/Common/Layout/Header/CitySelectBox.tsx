@@ -4,7 +4,7 @@ const CitySelectBox = ({cityData,handleCityChange,city, t}:any) => {
   // console.log(cityData)
   return (
     <select value={city} onChange={handleCityChange}>
-      <option value="">{t("select")}</option>
+      <option value={t("select")}>{t("select")}</option>
       {cityData &&
         cityData.length > 0 &&
         cityData?.map((item: any, i: any) => (

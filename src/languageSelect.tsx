@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 const languageMap: any = {
   en: { label: "English", dir: "ltr", active: true},
-  hi: { label: "हिन्दी", dir: "ltr", active: false },
+  hn: { label: "हिन्दी", dir: "ltr", active: false },
   bn: { label: "বাংলা", dir: "ltr", active: false },
   kn: { label: "ಕನ್ನಡ", dir: "ltr", active: false },
   ta: { label: "தமிழ்", dir: "ltr", active: false},  

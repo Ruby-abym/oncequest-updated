@@ -92,14 +92,14 @@ const CareerForm = (props: any) => {
                         </div>
                         <div className="row align-items-center mt-4">
                             <div className="col">
-                                <input type="text" className="form-control" placeholder={t("email")} name="Email" onChange={handleChange} onBlur={handleBlur} value={values?.Email} />
+                                <input type="text" className="form-control" placeholder={`${t("email")}*`} name="Email" onChange={handleChange} onBlur={handleBlur} value={values?.Email} />
                                 {touched?.Email && errors?.Email && <span className="error_message">{t(errors?.Email as any)}</span>}
                             </div>
                         </div>
                         <div className="row align-items-center mt-4">
                             <div className="col">
                                 <select className="form-control" name="JobId" id="JobId" onChange={handleChange} onBlur={handleBlur} value={values.JobId}>
-                                    <option value="">{t("position")}</option>
+                                    <option value="">{`${t("position")}*`}</option>
                                     {job && job?.length > 0 && job?.map((item: any, i: any) => (
                                         <option className="text-uppercase" value={item?.Id} key={i}>{t(item?.JobTitle)}</option>
                                     ))}
@@ -110,7 +110,7 @@ const CareerForm = (props: any) => {
                         <div className="row align-items-center mt-4">
                             <div className="col-sm">
                                 <select className="form-control" name="Experience" id="Experience" onChange={handleChange} onBlur={handleBlur} value={values.Experience}>
-                                    <option value="">{t("experience")}</option>
+                                    <option value="">{`${t("experience")}*`}</option>
                                     {Array.from(Array(31).keys())?.map((item: any, i: any) => (
                                         <option className="text-uppercase" value={`${item} ${t("years")}`} key={i}>{`${item} ${t("years")}`}</option>
                                     ))}
@@ -119,7 +119,7 @@ const CareerForm = (props: any) => {
                             </div>
                             <div className="col-sm mt-4 mt-sm-0">
                                 <select className="form-control" name="CityId" id="CityId" onChange={handleChange} onBlur={handleBlur} value={values.CityId}>
-                                    <option value="">{t("city")}</option>
+                                    <option value="">{`${t("city")}*`}</option>
                                     {cityData && cityData.length > 0 && cityData?.map((item: any, i: any) => (
                                         <option className="text-uppercase" value={item?.Id} key={i}>{t(item?.Name)}</option>
                                     ))}
