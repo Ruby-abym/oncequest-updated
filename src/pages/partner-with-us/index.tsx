@@ -152,7 +152,7 @@ const BecomePartner : NextPage<MyPageProps> = ({seoData})=>{
                                                     </div>
                                                     <div className="form-group">
                                                         <select className="form-control" name="CityId" id="CityId" onChange={handleChange} onBlur={handleBlur} value={values.CityId}>
-                                                            <option value="">{t("city")}</option>
+                                                            <option value="">{`${t("city")}*`}</option>
                                                             {cityData && cityData.length > 0 && cityData?.map((item: any, i: any) => (
                                                                 <option className="text-uppercase" value={item?.Id + ',' + item?.Name} key={i}>{t(item?.Name)}</option>
                                                             ))}

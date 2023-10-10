@@ -14,7 +14,7 @@ const languageMap: any = {
 const LanguageSelect = () => {
   // const selected = typeof localStorage !== 'undefined' && localStorage.getItem("i18nextLng") || "en";
   
-  const {locale} = useRouter();
+  const {locale,query, pathname} = useRouter();
  
 
   return (
@@ -22,7 +22,7 @@ const LanguageSelect = () => {
       <img src="/assets/img/language1.svg" alt="lang" />
       {Object.keys(languageMap)?.map((item, i) => (
         <React.Fragment key={i}>
-          <Link href="" locale={item} className={locale == item ? "activeLang":""} 
+          <Link href={{pathname,query}} locale={item} className={locale == item ? "activeLang":""} 
           >{languageMap[item].label}</Link>
           <span>{(Object.keys(languageMap)?.length - 1) > i && `  |  `}</span>
         </React.Fragment>

@@ -700,6 +700,7 @@ const PathlogyTestCity: NextPage<MyPageProps> = ({ seoData }) => {
   );
 };
 export const getServerSideProps = async ({ locale,params }:{locale: string,params:any}) => {
+  
   let Slug = `${ROUTE.PATHLOGYTEST}/${params.slug}`?.replace("/", "");
  
   const data: any = await Api.post(Url.seoDetail, { Slug: Slug});

@@ -38,7 +38,7 @@ const PackageDetails: NextPage<MyPageProps> = ({ seoData }) =>  {
   const component = useSelector(
     (state: any) => state.package.packageComponent?.Lists
   );
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = React.useState(true);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -438,16 +438,7 @@ const PackageDetails: NextPage<MyPageProps> = ({ seoData }) =>  {
                     <div className="col-12 my-4">
                       <div className="dd">
                         <div className="bg-pdf">
-                          <img
-                            className="scale img_1"
-                            src={t("images.sample")}
-                            alt=""
-                          />
-                          <img
-                            className="scale img_2"
-                            src={t("images.sample_report_bg")}
-                            alt=""
-                          />
+                         
                           <a
                             href={packageData?.SampleReport}
                             target="_blank"

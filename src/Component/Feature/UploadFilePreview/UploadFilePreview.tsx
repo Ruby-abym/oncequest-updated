@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 
 const UploadFilePreview = (props:any) => {
+    console.log("hello")
     const {file,filePath,RemoveImg,setFile}=props;
     useEffect(() => {
         return () => {}

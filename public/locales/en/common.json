@@ -1,7 +1,7 @@
 {
     "select": "Select",
     "select_language": "Select Language",
-        "select_city": "select city",
+        "select_city": "Select City",
         "Ahmedabad":"Ahmedabad",
         "Allahabad":"Allahabad",
         "Amritsar":"Amritsar",
@@ -656,7 +656,7 @@
     "position" : "Position",
     "years" : "Years",
     "doctor3" : "doctor3",
-    "articles_resources_well" : "Articles & resources on Wellness",
+    "articles_resources_well" : "Articles & Resources on Wellness",
     "our_expert_advice" : "Our expert advice & curated blogs will help you make better health decision",
     "packages" : "Packages",
     "test" : "TESTS",

@@ -38,7 +38,7 @@ const GeneralEnquiry: NextPage<MyPageProps> = ({seoData})=>  {
     const handleSubmit = (values: any) => {
         let val: any = { ...values };
         val.SourceUrl = window.location.href;
-        dispatch(submitAction.submitEnquiryAction(val, history));
+        dispatch(submitAction.submitEnquiryAction(val, router));
     };
   if(!initialRenderComplete) return<></>
     return (
@@ -115,7 +115,7 @@ const GeneralEnquiry: NextPage<MyPageProps> = ({seoData})=>  {
                                                             {touched?.Email && errors?.Email && <span className="error_message">{errors?.Email as any}</span>}
                                                         </div>
                                                         <div className="form-group">
-                                                            <textarea className="form-control" placeholder={t("message")} name="Message" onChange={handleChange} onBlur={handleBlur} value={values?.Message}></textarea>
+                                                            <textarea className="form-control" placeholder={`${t("message")}*`} name="Message" onChange={handleChange} onBlur={handleBlur} value={values?.Message}></textarea>
                                                             {touched?.Message && errors?.Message && <span className="error_message">{t(errors?.Message as any)}</span>}
                                                         </div>
                                                         <button type="submit" className="book--hexagon active" ><span>{t("submit_btn")}<i className="fa fa-long-arrow-right ml-20" aria-hidden="true"></i></span></button>

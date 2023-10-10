@@ -14,14 +14,14 @@ const languageMap: any = {
 const LanguageSelectMobile = (props: any) => {
   
     const {t} = useTranslation()
-  const {locale} = useRouter()
+  const {locale,query,pathname} = useRouter()
 
     return (
         <div className="h_dropdown"><i className="fa fa-language" style={{ marginRight: "10px" }}></i><span>{t("select_language")}<i className="fa fa-angle-down fa-xs ml-2"></i></span>
             <div className="h_dropdown-menu">
                 {Object.keys(languageMap)?.map((item, i) => (
                     <React.Fragment key={i}>
-                        <div><Link href="" locale={item}
+                        <div><Link href={{pathname,query}} locale={item}
                         className={locale == item ? "activeLang":""} 
                          >{languageMap[item].label}</Link></div>
                         {(Object.keys(languageMap)?.length - 1) > i && <hr />}

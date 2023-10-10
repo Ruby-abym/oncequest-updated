@@ -15,11 +15,11 @@ const SubmitForm = (props:any) => {
     const dispatch = useDispatch();
     const router=useRouter();
     const cityData = useSelector((state:any) => state.dashboard.city);
-
+   console.log(PageSrc)
     const handleSubmit = (val:any) => {
         let data:any={...val};
         data.SourceUrl = window.location.href;
-        dispatch(submitAction.submitQueryAction(data,history));
+        dispatch(submitAction.submitQueryAction(data,router));
     };
     return (
         <section className="department_form section">
@@ -55,12 +55,12 @@ const SubmitForm = (props:any) => {
                       </div>
                       <div className="row align-items-center mt-4">
                         <div className="col-sm">
-                            <input type="text" className="form-control" placeholder={t("email")} name="Email" onChange={handleChange} onBlur={handleBlur} value={values?.Email}/>
+                            <input type="text" className="form-control" placeholder={`${t("email")} ${PageSrc=='Brochures'?"*":""}`} name="Email" onChange={handleChange} onBlur={handleBlur} value={values?.Email}/>
                             {touched?.Email && errors?.Email &&<span className="error_message">{t(errors?.Email as any)}</span>}
                         </div>
                         <div className="col-sm mt-4 mt-sm-0">
                             <select className="form-control" name="CityId" id="CityId" onChange={handleChange} onBlur={handleBlur} value={values.CityId}>
-                                <option value="">{t("city")}</option>
+                                <option value="">{`${t("city")}${PageSrc=='Brochures'?"":"*"}`}</option>
                                 {cityData && cityData.length > 0 && cityData?.map((item:any, i:any)=> (
                                 <option className="text-uppercase" value={item?.Id} key={i}>{t(item?.Name)}</option>
                                 ))}
@@ -70,7 +70,7 @@ const SubmitForm = (props:any) => {
                       </div>
                       <div className="row align-items-center">
                         <div className="col mt-4">
-                          <textarea className="form-control" placeholder={t("message")} name="Message" onChange={handleChange} onBlur={handleBlur} value={values?.Message}></textarea>
+                          <textarea className="form-control" placeholder={`${t("message")}*`} name="Message" onChange={handleChange} onBlur={handleBlur} value={values?.Message}></textarea>
                           {touched?.Message && errors?.Message &&<span className="error_message">{t(errors?.Message as any)}</span>}
                         </div>
                       </div>

@@ -47,7 +47,7 @@ const Brochure: NextPage<MyPageProps> = ({ seoData }) =>  {
   useEffect(() => {
     if (brochureData) {
       let newData = groupBy(brochureData, "department_id");
-      console.log(newData);
+      
       setBrochure(newData);
     }
     return () => {};
