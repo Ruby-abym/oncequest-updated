@@ -992,6 +992,12 @@ p.numberUtil:first-child{
   width: 650px;
   margin: auto;
 }
+.core-strengths .about-sec-img img {
+  width: 310px;
+}
+.for-radius {
+  border-radius: 16px;
+}
 @media only screen and (max-width: 767px) {
   .form_width_40 {
     width: 100%;

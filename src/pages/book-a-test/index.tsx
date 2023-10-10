@@ -47,7 +47,7 @@ const BookATest: NextPage<MyPageProps> = ({ seoData }) => {
   const [searchTerm, setSearchTerm] = useState<any>("");
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [code, setCode] = useState<any>("");
-  console.log(tab)
+  
   const testData = useSelector((state: any) =>
     state.test.list ? state.test.list : {}
   );
