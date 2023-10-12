@@ -41,15 +41,25 @@ const LabsDetails : NextPage<MyPageProps> = ({ seoData }) =>{
     const [day, setDay] = useState("");
     const [altitude, setAltitude] = useState<any[]>([]);
     const centerData: any = useSelector((state: any) => state.center.selected ? state.center.selected : {});
+    
     const nearCenterData = useSelector((state: any) => state.center.nearByCenter ? state.center.nearByCenter?.Centres : {});
+    const centerval =useSelector((state: any) => state.center.list ? state.center.list: {});
+   
+   
     const [initialRenderComplete, setInitialRenderComplete] = useState<boolean>(false);
     useEffect(() => {
       setInitialRenderComplete(true);
+    
     }, []);
-  
+   
     useEffect(() => {
         window?.scrollTo(0, 0);
         dispatch(centerAction.getCenterBySlugAction(slug));
+        if(centerval==null){
+            console.log("this is not right page")
+           
+            // router.push('/404')
+          }
         return () => { };
     }, [slug]);
 
@@ -227,10 +237,10 @@ const LabsDetails : NextPage<MyPageProps> = ({ seoData }) =>{
     )
 }
 export const getServerSideProps = async ({ locale,params }:{locale: string,params:any}) => {
-    let Slug = `${ROUTE.CENTERDETAILS}/${params.slug}`?.replace("/", "");
+    let Slug = `${ROUTE.CENTERDETAILS}/${params?.slug}`?.replace("/", "");
    
     const data: any = await Api.post(Url.seoDetail, { Slug: Slug});
-   
+     
     return {
       props: {
         seoData: data?.Result?.Details || {},

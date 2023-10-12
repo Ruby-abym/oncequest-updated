@@ -54,6 +54,7 @@ const Labs: NextPage<MyPageProps> = ({ seoData }) =>{
     const [excludedCentreIds, setExcludedCentreIds] = useState<any>([]);
     const centerData: any = useSelector((state: any) => state.center.list ? state.center.list : {});
     const nearCenterData = useSelector((state: any) => state.center.relatedCentre ? state.center.relatedCentre : []);
+    
     const state: any[] = useSelector((state: any) => state.dashboard.state);
     const city: any[] = useSelector((state: any) => state.dashboard.city);
     const nearestCenters = localStoreCity == "" ? nearCenterData : [];
@@ -86,6 +87,7 @@ const Labs: NextPage<MyPageProps> = ({ seoData }) =>{
         if (related && centerData?.Centres?.length > 0) {
             let StateId = centerData?.Centres?.[0].StateId;
             let CityId = centerData?.Centres?.[0].CityId;
+            
             dispatch(centerAction.getRelatedCentreAction({ "StateId": StateId, "CityId": CityId }));
         }
         return () => { };
