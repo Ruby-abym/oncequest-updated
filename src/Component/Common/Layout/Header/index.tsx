@@ -1289,6 +1289,7 @@ function Header(props: any) {
                                 pathname: ROUTE.TESTIMONIAL,
                                 query: { type: 1 },
                               }}
+                              as={ROUTE.TESTIMONIAL}
                               onClick={(e: any) => removeClass()}
                               passHref
                             >
@@ -1406,6 +1407,7 @@ function Header(props: any) {
                                 pathname: ROUTE.TESTIMONIAL,
                                 query: { type: 2 },
                               }}
+                              as={ROUTE.TESTIMONIAL}
                               onClick={(e: any) => removeClass()}
                               passHref
                             >
