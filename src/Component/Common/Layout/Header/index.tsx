@@ -1254,8 +1254,7 @@ function Header(props: any) {
                                 pathname: ROUTE.BOOKATEST,
                                 query: {
                                   tabs: "packages",
-                                  categoryId: "",
-                                  subCategoryId: "",
+                                 
                                 },
                               }}
                               as={ROUTE.BOOKATEST}

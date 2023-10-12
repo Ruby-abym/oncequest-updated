@@ -43,7 +43,7 @@ const LabsDetails : NextPage<MyPageProps> = ({ seoData }) =>{
     const centerData: any = useSelector((state: any) => state.center.selected ? state.center.selected : {});
     
     const nearCenterData = useSelector((state: any) => state.center.nearByCenter ? state.center.nearByCenter?.Centres : {});
-    const centerval =useSelector((state: any) => state.center.list ? state.center.list: {});
+  
    
    
     const [initialRenderComplete, setInitialRenderComplete] = useState<boolean>(false);
@@ -52,14 +52,12 @@ const LabsDetails : NextPage<MyPageProps> = ({ seoData }) =>{
     
     }, []);
    
+
+
     useEffect(() => {
         window?.scrollTo(0, 0);
         dispatch(centerAction.getCenterBySlugAction(slug));
-        if(centerval==null){
-            console.log("this is not right page")
-           
-            // router.push('/404')
-          }
+    
         return () => { };
     }, [slug]);
 
@@ -236,16 +234,30 @@ const LabsDetails : NextPage<MyPageProps> = ({ seoData }) =>{
         </React.Fragment>
     )
 }
+
 export const getServerSideProps = async ({ locale,params }:{locale: string,params:any}) => {
     let Slug = `${ROUTE.CENTERDETAILS}/${params?.slug}`?.replace("/", "");
-   
+    const val:any = await Api.post(Url.centerDetails,{ slug: params?.slug})
+    console.log(val)
+    // const centre =val?.Result?.Centres;
+    // const slugs = centre.map((item: { Slug: any; })=>item.Slug)
+    // console.log(slugs)
     const data: any = await Api.post(Url.seoDetail, { Slug: Slug});
+    // if(slugs.indexOf(params.slug)!==-1){
+        return {
+            props: {
+              seoData: data?.Result?.Details || {},
+              ...(await serverSideTranslations(locale, ["common"])),
+            },
+          };
+    // }
+    // else{
+    //     return{
+    //         notFound:true,
+    //     }
+    // }
+    
      
-    return {
-      props: {
-        seoData: data?.Result?.Details || {},
-        ...(await serverSideTranslations(locale, ["common"])),
-      },
-    };
+   
   };
 export default LabsDetails

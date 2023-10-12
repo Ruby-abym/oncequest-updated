@@ -58,7 +58,7 @@ const Labs: NextPage<MyPageProps> = ({ seoData }) =>{
     const state: any[] = useSelector((state: any) => state.dashboard.state);
     const city: any[] = useSelector((state: any) => state.dashboard.city);
     const nearestCenters = localStoreCity == "" ? nearCenterData : [];
-    console.log(centerData)
+   
     useEffect(() => {
         window?.scrollTo(0, 0);
         setLocalStoreCity(getSelectedCity());
@@ -201,7 +201,7 @@ const Labs: NextPage<MyPageProps> = ({ seoData }) =>{
         }
         return () => { };
     }, [centerData]);
-    console.log(altitude)
+  
 
     const handleSearch = (e: any) => {
         setRelated(false);

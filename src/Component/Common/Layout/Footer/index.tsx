@@ -165,8 +165,6 @@ function Footer(props: any) {
                           pathname: ROUTE.BOOKATEST,
                           query: {
                             tabs: "tests",
-                            categoryId: "",
-                            subCategoryId: "",
                           },
                         }}
                         as={ROUTE.BOOKATEST}
@@ -194,8 +192,7 @@ function Footer(props: any) {
                           pathname: ROUTE.BOOKATEST,
                           query: {
                             tabs: "packages",
-                            categoryId: "",
-                            subCategoryId: "",
+                           
                           },
                         }}
                         as={ROUTE.BOOKATEST}

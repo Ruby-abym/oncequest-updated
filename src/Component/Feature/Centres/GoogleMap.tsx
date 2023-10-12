@@ -40,7 +40,7 @@ const MapWithMarker = ((props: any) => {
       }
     })
   }
-  console.log("hello")
+ 
   return (
     // <>hello</>
     <GoogleMap

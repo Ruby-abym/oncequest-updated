@@ -11,14 +11,12 @@ import SectionLoader from '@/Component/Common/Loader/SectionLoader';
 const Facility = (props: any) => {
     let fArr: any[] = props?.facilityArray || [];
     const { t } = useTranslation();
-    const abc = useParams();
     
-    console.log(abc)
+   
     const router = useRouter()
-    // const { slug } = useParams();
-    console.log(router)
+   
     const dispatch = useDispatch();
-    // const location = useLocation<any>();
+   
     useEffect(() => {
         dispatch(centerAction.getFacilityAction({ DepartmentId: "" }));
         return () => { };

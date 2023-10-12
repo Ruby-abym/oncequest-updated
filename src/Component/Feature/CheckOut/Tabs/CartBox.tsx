@@ -111,11 +111,7 @@ const CartBox = ({ totalPayble = 0, setTotalPayble }: ICardBox) => {
             className="book--hexagon active"
             onClick={(e: any) => {
               e.preventDefault();
-            router.push({pathname:ROUTE.BOOKATEST, query:{
-                tabs: "",
-                categoryId: "",
-                subCategoryId: "",
-              }});
+            router.push({pathname:ROUTE.BOOKATEST});
             }}
           >
             <span className="text-capitalize">
@@ -159,6 +155,9 @@ const CartBox = ({ totalPayble = 0, setTotalPayble }: ICardBox) => {
                         value={coupen}
                         onChange={(e: any) => setCoupen(e.target.value)}
                       />
+                      {
+                        coupen==""&&coupen.length<6?<p>Invalid Coupen</p>:""
+                      }
                       <img
                         className="mr-2"
                         src="/assets/img/my-profile/blue-cross.png"

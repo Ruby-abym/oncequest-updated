@@ -998,6 +998,27 @@ p.numberUtil:first-child{
 .for-radius {
   border-radius: 16px;
 }
+.pathlogy-content h2 {
+  color: #343a40!important;
+  margin-bottom: 1rem!important;
+  margin-top: 1rem!important;
+  font-size: 22px!important;
+}
+.pathlogy-content p {
+  font-size: 14px;
+}
+.imp-instruction p {
+  padding-bottom: 6px;
+}
+.imp-instruction ol li {
+  line-height: 30px;
+  margin-left: 20px;
+  padding-left: 6px;
+}
+.seo-footer-content h3 {
+  font-size: 19px;
+  margin: 16px 0;
+}
 @media only screen and (max-width: 767px) {
   .form_width_40 {
     width: 100%;
