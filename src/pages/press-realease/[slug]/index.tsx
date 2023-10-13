@@ -16,6 +16,12 @@ interface MyPageProps {
     seoData:any;
   }
 const PressRealeaseDetails : NextPage<MyPageProps> = ({ seoData })  => {
+    const [initialRenderComplete, setInitialRenderComplete] = useState<boolean>(false);
+    useEffect(() => {
+      setInitialRenderComplete(true);
+    
+    }, []);
+   
     const { t } = useTranslation();
    const router = useRouter()
    const {slug}:any = router.query;
@@ -27,6 +33,7 @@ const PressRealeaseDetails : NextPage<MyPageProps> = ({ seoData })  => {
         dispatch(dashboardAction.pressReleaseBySlugAction(slug));
         return () => {};
     }, [slug]);
+    if(!initialRenderComplete) return<></>
 
     return (
         <React.Fragment>
@@ -121,6 +128,33 @@ const PressRealeaseDetails : NextPage<MyPageProps> = ({ seoData })  => {
      </React.Fragment>
     )
 }
+export const getServerSideProps = async ({ locale,params }:{locale: string,params:any}) => {
+    let Slug = `${ROUTE.CENTERDETAILS}/${params?.slug}`?.replace("/", "");
 
+
+    const val:any = await Api.post(`${Url.pressreleaseBySlug}/${params?.slug}`,{});
+    
+
+    const data: any = await Api.post(Url.seoDetail, { Slug: Slug});
+
+   const isSlugCorrect = val?.Result?.Details?.Id
+    if(isSlugCorrect){
+        return {
+            props: {
+              
+              seoData: data?.Result?.Details || {},
+              ...(await serverSideTranslations(locale, ["common"])),
+            },
+          };
+    }
+    else{
+        return{
+            notFound:true,
+        }
+    }
+    
+     
+   
+  };
 export default PressRealeaseDetails
 

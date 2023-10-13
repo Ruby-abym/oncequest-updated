@@ -25,6 +25,7 @@ export class PackageService {
         }
         return await Api.post(`${Url.subcategories}`, {});
     };
+    
     public getAllOffer = async (data: any): Promise<HttpResponse<any>> => {
         return await Api.post(Url.allOffer, {});
     };

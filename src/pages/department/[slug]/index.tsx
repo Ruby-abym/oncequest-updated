@@ -104,14 +104,24 @@ const DepartmentDetails: NextPage<MyPageProps> = ({ seoData }) => {
 }
 export const getServerSideProps = async ({ locale,params }:{locale: string,params:any}) => {
     let Slug = `${ROUTE.DEPARTMENTDETAILS}/${params.slug}`?.replace("/", "");
-   
+     const val = await Api.post(`${Url.departmentBySlug}/${params.slug}`, {});
     const data: any = await Api.post(Url.seoDetail, { Slug: Slug});
-   
-    return {
-      props: {
-        seoData: data?.Result?.Details || {},
-        ...(await serverSideTranslations(locale, ["common"])),
-      },
-    };
+    
+    const isSlugCorrect = val?.Result?.DepartmentDetails?.Id;
+     
+    if(isSlugCorrect){
+      return {
+          props: {
+            
+            seoData: data?.Result?.Details || {},
+            ...(await serverSideTranslations(locale, ["common"])),
+          },
+        };
+  }
+  else{
+      return{
+          notFound:true,
+      }
+  }
   };
 export default DepartmentDetails

@@ -480,14 +480,29 @@ const TestDetails: NextPage<MyPageProps> = ({ seoData }) =>  {
 }
 export const getServerSideProps = async ({ locale,params }:{locale: string,params:any}) => {
   let Slug = `${ROUTE.TESTDETAILS}/${params.slug}`?.replace("/", "");
-  console.log(Slug)
+  
   const data: any = await Api.post(Url.seoDetail, { Slug: Slug});
  
-  return {
-    props: {
-      seoData: data?.Result?.Details || {},
-      ...(await serverSideTranslations(locale, ["common"])),
-    },
-  };
+  const val:any = await Api.post(`${Url.testBySlug}/${params?.slug}`,{});
+    
+
+   
+
+   const isSlugCorrect = val?.Result?.Details?.Id
+    if(isSlugCorrect){
+        return {
+            props: {
+              
+              seoData: data?.Result?.Details || {},
+              ...(await serverSideTranslations(locale, ["common"])),
+            },
+          };
+    }
+    else{
+        return{
+            notFound:true,
+        }
+    }
+    
 };
 export default TestDetails;

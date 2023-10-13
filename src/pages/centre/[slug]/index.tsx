@@ -30,9 +30,11 @@ import dynamic from 'next/dynamic';
 const Facility = dynamic(()=>import('@/Component/Feature/Centres/Facility'))
 interface MyPageProps {
     seoData:any;
+   
   }
 
-const LabsDetails : NextPage<MyPageProps> = ({ seoData }) =>{
+const LabsDetails : NextPage<MyPageProps> = ({seoData }) =>{
+   
     const { t } = useTranslation();
    const router = useRouter();
    const {slug}:any = router.query;
@@ -237,25 +239,28 @@ const LabsDetails : NextPage<MyPageProps> = ({ seoData }) =>{
 
 export const getServerSideProps = async ({ locale,params }:{locale: string,params:any}) => {
     let Slug = `${ROUTE.CENTERDETAILS}/${params?.slug}`?.replace("/", "");
-    const val:any = await Api.post(Url.centerDetails,{ slug: params?.slug})
-    console.log(val)
-    // const centre =val?.Result?.Centres;
-    // const slugs = centre.map((item: { Slug: any; })=>item.Slug)
-    // console.log(slugs)
+
+
+    const val:any = await Api.post(`${Url.centerBySlug}/${params?.slug}`,{});
+    
+
     const data: any = await Api.post(Url.seoDetail, { Slug: Slug});
-    // if(slugs.indexOf(params.slug)!==-1){
+
+   const isSlugCorrect = val?.Result?.CentreDetails?.Id
+    if(isSlugCorrect){
         return {
             props: {
+              
               seoData: data?.Result?.Details || {},
               ...(await serverSideTranslations(locale, ["common"])),
             },
           };
-    // }
-    // else{
-    //     return{
-    //         notFound:true,
-    //     }
-    // }
+    }
+    else{
+        return{
+            notFound:true,
+        }
+    }
     
      
    

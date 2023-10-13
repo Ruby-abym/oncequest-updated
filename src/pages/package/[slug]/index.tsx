@@ -487,14 +487,27 @@ const PackageDetails: NextPage<MyPageProps> = ({ seoData }) =>  {
 }
 export const getServerSideProps = async ({ locale,params }:{locale: string,params:any}) => {
     let Slug = `${ROUTE.PACKAGEDETAILS}/${params.slug}`?.replace("/", "");
-    console.log(Slug)
-    const data: any = await Api.post(Url.seoDetail, { Slug: Slug});
    
-    return {
-      props: {
-        seoData: data?.Result?.Details || {},
-        ...(await serverSideTranslations(locale, ["common"])),
-      },
-    };
+    const data: any = await Api.post(Url.seoDetail, { Slug: Slug});
+    try {
+         const val:any = await Api.post(`${Url.packageBySlug}/${params?.slug}`,{});
+    
+ 
+  return {
+    props: {
+      
+      seoData: data?.Result?.Details || {},
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
+
+  
+    } catch (error) {
+      return{
+                notFound:true,
+            }
+    }
+    
+    
   };
 export default PackageDetails;

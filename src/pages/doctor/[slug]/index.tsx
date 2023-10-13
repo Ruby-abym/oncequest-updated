@@ -255,12 +255,27 @@ export const getServerSideProps = async ({ locale,params }:{locale: string,param
    
     const data: any = await Api.post(Url.seoDetail, { Slug: Slug});
    
-    return {
-      props: {
-        seoData: data?.Result?.Details || {},
-        ...(await serverSideTranslations(locale, ["common"])),
-      },
-    };
+    const val:any = await Api.post(`${Url.doctorBySlug}/${params?.slug}`,{});
+    
+
+    
+
+   const isSlugCorrect = val?.Result?.DoctorDetails?.Id
+    if(isSlugCorrect){
+        return {
+            props: {
+              
+              seoData: data?.Result?.Details || {},
+              ...(await serverSideTranslations(locale, ["common"])),
+            },
+          };
+    }
+    else{
+        return{
+            notFound:true,
+        }
+    }
+    
   };
 export default DoctorDetails
 
